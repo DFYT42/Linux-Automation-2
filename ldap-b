@@ -2,73 +2,102 @@
 
 yum install -y git
 cd /tmp
-git clone http://github.com/DFYT42
+git clone https://github.com/DFYT42/Linux-Automation-2
 
 yum -y install openldap-servers openldap-clients
+
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+#giving ownership from root to ldap bc ldap has to be owner of ldap daemon to get info
 chown ldap. /var/lib/ldap/DB_CONFIG 
-ls
+
+#ldap daemon
 systemctl enable slapd
 systemctl start slapd
-    7  yum -y install httpd
-    8  yum -y install phpldapadmin
-    9  setsebool -P httpd_can_connect_ldap on
-   10  systemctl enable httpd
-   11  syetmctl start httpd
-   12  systemctl start httpd
-   13  sed -i 's,Require local,#Require local\n  Require all granted,g' /etc/httpd/conf.d/phpldapadmin.conf
-   14  vim /etc/httpd/conf.d/phpldapadmin.conf
-   15  echo "dn: olcDatabase={2}hdb,cn=config
-   16  changetype: modify
-   17  replace: olcSuffix
-   18  olcSuffix: dc=nti310,dc=local
-   19  dn: olcDatabase={2}hdb,cn=config
-   20  changetype: modify
-   21  replace: olcRootDN
-   22  olcRootDN: cn=ldapadm,dc=nti310,dc=local
-   23  dn: olcDatabase={2}hdb,cn=config
-   24  changetype: modify
-   25  replace: olcRootPW
-   26  olcRootPW: $newhash" >> db.ldif
-   27  ls -l
-   28  cat db.ldif 
-   29  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
-   30  ldapmodify -y EXTERNAL  -H ldapi:/// -f db.ldif
-   31  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
-   32  vim db.ldif 
-   33  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
-   34  vim db.ldif 
-   35  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
-   36  vim db.ldif 
-   37  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
-   38  vim db.ldif 
-   39  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
-   40  vim /etc/httpd/conf.d/phpldapadmin.conf
-   41  systemctl restart httpd.service
-   42  vim /etc/httpd/conf.d/phpldapadmin.conf
-   43  echo 'dn: olcDatabase={1}monitor,cn=config
-   44  changetype: modify
-   45  replace: olcAccess
-   46  olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base="cn
-=ldapadm,dc=nti310,dc=local" read by * none' > monitor.ldif
-   47  ldapmodify -Y EXTERNAL -H ldapi:/// -f monitor.ldif
-   48  openssl req -new -x509 -nodes -out /etc/openldap/certs/nti310ldapcert.pem -keyout /etc/openldap/certs/nti310
-ldapkey.pem -days 365 -subj "/C=US/ST=WA/L=Seattle/O=SCC/OU=IT/CN=nti310.local"
-   49  chown -R ldap. /etc/openldap/certs/nti*.pem
-   50  echo "dn: cn=config
-   51  changetype: modify
-   52  replace: olcTLSCertificateFile
-   53  olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem
-   54  dn: cn=config
-   55  changetype: modify
-   56  replace: olcTLSCertificateKeyFile
-   57  olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem" > certs.ldif
-   58  ls
-   59  vim certs.ldif 
-   60  cat certs.ldif 
-   61  vim certs.ldif 
-   62  vim certs.ldif 
-   63  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
+
+#apache server
+yum -y install httpd
+yum -y install phpldapadmin
+
+#Let's SELinux - know what is going on
+#NSA to harden and secure Linux systems
+#Apache connecct to ldap
+setsebool -P httpd_can_connect_ldap on
+
+systemctl enable httpd
+syetmctl start httpd
+
+#modifies our httpd.conf to access from external URL
+sed -i 's,Require local,#Require local\n  Require all granted,g' /etc/httpd/conf.d/phpldapadmin.conf
+unalias cp
+
+#making backup in case something goes wrong
+cp /etc/phpldapadmin/config.php /etc/phpldapadmin/config.php.orig
+
+cp /tmp/DFYT42/Linux-Automation-2/config.php /etc/phpldapadmin/config.php
+chown ldap:apache /etc/phpldapadmin/config.php
+
+systemctl restart httpd.service
+
+echo "phpldapadmin is now up and running"
+echo "we are configuring ldap and ldap admin"
+
+#Generates and stores new passwords & restricts only root user to read
+newsecret=$(slappasswd -g)
+newhash=$(slappasswd -s "$newsecret")
+echo -n "$newsecret" > /root/ldap_admin_pass
+chmod 0600 /root/ldap_admin_pass
+
+#Becomes ldif and configures root domain
+echo -e "dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcSuffix
+olcSuffix: dc=nti310,dc=local
+\n
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcRootDN
+olcRootDN: cn=ldapadm,dc=nti310,dc=local
+\n
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcRootPW
+olcRootPW: $newhash" > db.ldif
+
+ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
+
+#Auth restriction
+
+echo 'dn: olcDatabase={1}monitor,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base="cn=ldapadm,dc=nti310,dc=local" read by * none' > monitor.ldif
+
+ldapmodify -Y EXTERNAL -H ldapi:/// -f monitor.ldif
+
+#Generates Certs
+openssl req -new -x509 -nodes -out /etc/openldap/certs/nti310ldapcert.pem -keyout /etc/openldap/certs/nti310ldapkey.pem -days 365 -subj "/C=US/ST=WA/L=Seattle/O=SCC/OU=IT/CN=nti310.local"
+
+chown -R ldap. /etc/openldap/certs/nti*.pem
+
+##Error [root@ldap-b tmp]# ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
+#SASL/EXTERNAL authentication started
+#SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+#SASL SSF: 0
+#modifying entry "cn=config"
+#ldap_modify: Other (e.g., implementation specific) error (80)
+echo -e "dn: cn=config
+changetype: modify
+replace: olcTLSCertificateFile
+olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem
+\n
+dn: cn=config
+changetype: modify
+replace: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem" > certs.ldif
+ 
+ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
+
+###Class Ends###
    64  vim certs.ldif 
    65  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
    66  vim certs.ldif 
