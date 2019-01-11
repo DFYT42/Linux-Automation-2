@@ -1,0 +1,120 @@
+    1  yum -y install openldap-servers openldap-clients
+    2  cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+    3  chown ldap. /var/lib/ldap/DB_CONFIG 
+    4  ls
+    5  systemctl enable slapd
+    6  systemctl start slapd
+    7  yum -y install httpd
+    8  yum -y install phpldapadmin
+    9  setsebool -P httpd_can_connect_ldap on
+   10  systemctl enable httpd
+   11  syetmctl start httpd
+   12  systemctl start httpd
+   13  sed -i 's,Require local,#Require local\n  Require all granted,g' /etc/httpd/conf.d/phpldapadmin.conf
+   14  vim /etc/httpd/conf.d/phpldapadmin.conf
+   15  echo "dn: olcDatabase={2}hdb,cn=config
+   16  changetype: modify
+   17  replace: olcSuffix
+   18  olcSuffix: dc=nti310,dc=local
+   19  dn: olcDatabase={2}hdb,cn=config
+   20  changetype: modify
+   21  replace: olcRootDN
+   22  olcRootDN: cn=ldapadm,dc=nti310,dc=local
+   23  dn: olcDatabase={2}hdb,cn=config
+   24  changetype: modify
+   25  replace: olcRootPW
+   26  olcRootPW: $newhash" >> db.ldif
+   27  ls -l
+   28  cat db.ldif 
+   29  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
+   30  ldapmodify -y EXTERNAL  -H ldapi:/// -f db.ldif
+   31  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
+   32  vim db.ldif 
+   33  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
+   34  vim db.ldif 
+   35  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
+   36  vim db.ldif 
+   37  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
+   38  vim db.ldif 
+   39  ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
+   40  vim /etc/httpd/conf.d/phpldapadmin.conf
+   41  systemctl restart httpd.service
+   42  vim /etc/httpd/conf.d/phpldapadmin.conf
+   43  echo 'dn: olcDatabase={1}monitor,cn=config
+   44  changetype: modify
+   45  replace: olcAccess
+   46  olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base="cn
+=ldapadm,dc=nti310,dc=local" read by * none' > monitor.ldif
+   47  ldapmodify -Y EXTERNAL -H ldapi:/// -f monitor.ldif
+   48  openssl req -new -x509 -nodes -out /etc/openldap/certs/nti310ldapcert.pem -keyout /etc/openldap/certs/nti310
+ldapkey.pem -days 365 -subj "/C=US/ST=WA/L=Seattle/O=SCC/OU=IT/CN=nti310.local"
+   49  chown -R ldap. /etc/openldap/certs/nti*.pem
+   50  echo "dn: cn=config
+   51  changetype: modify
+   52  replace: olcTLSCertificateFile
+   53  olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem
+   54  dn: cn=config
+   55  changetype: modify
+   56  replace: olcTLSCertificateKeyFile
+   57  olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem" > certs.ldif
+   58  ls
+   59  vim certs.ldif 
+   60  cat certs.ldif 
+   61  vim certs.ldif 
+   62  vim certs.ldif 
+   63  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
+   64  vim certs.ldif 
+   65  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
+   66  vim certs.ldif 
+   67  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
+   68  rm certs.ldif 
+   69  echo "dn: cn=config
+   70  changetype: modify
+   71  replace: olcTLSCertificateFile
+   72  olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem" > certs1.ldif
+   73  echo "dn: cn=config
+   74  changetype: modify
+   75  replace: olcTLSCertificateKeyFile
+   76  olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem" > certs2.ldif
+   77  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs1.ldif
+   78  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs2.ldif
+   79  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs1.ldif
+   80  slaptest -u
+   81  unalias cp
+   82  ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif 
+   83  ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif 
+   84  ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif 
+   85  echo "dn: dc=nti310,dc=local
+   86  dc: nti310
+   87  objectClass: top
+   88  objectClass: domain
+   89  dn: cn=ldapadm ,dc=nti310,dc=local
+   90  objectClass: organizationalRole
+   91  cn: ldapadm
+   92  description: LDAP Manager
+   93  dn: ou=People,dc=nti310,dc=local
+   94  objectClass: organizationalUnit
+   95  ou: People
+   96  dn: ou=Group,dc=nti310,dc=local
+   97  objectClass: organizationalUnit
+   98  ou: Group" > base.ldif
+   99  ls
+  100  vim base.ldif 
+  101  ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif
+  102  vim /etc/httpd/conf.d/phpadmin.conf
+  103  vim /etc/httpd/conf.d/phpldapadmin.conf
+  104  systemctl restart httpd
+  105  journalctl -xe
+  106  vim /etc/httpd/conf.d/phpldapadmin.conf
+  107  clear
+  108  systemctl restart httpd
+  109  vim /etc/httpd/conf.d/phpldapadmin.conf
+  110  systemctl restart httpd
+  111  tail -f /var/log
+  112  tail -f /var/log/
+  113  cd /var/log/
+  114  ls
+  115  cd httpd
+  116  ls
+  117  cat error_log 
+   
