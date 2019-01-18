@@ -70,7 +70,7 @@ ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
 echo 'dn: olcDatabase={1}monitor,cn=config
 changetype: modify
 replace: olcAccess
-olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base="cn=ldapadm,dc=nti310,dc=local" read by * none' > monitor.ldif
+olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base="cn=ldapadm,dc=nti310,dc=local" read by * none' > monitor.ldif read by * none' > monitor.ldif
 
 ldapmodify -Y EXTERNAL -H ldapi:/// -f monitor.ldif
 
@@ -85,71 +85,55 @@ chown -R ldap. /etc/openldap/certs/nti*.pem
 #SASL SSF: 0
 #modifying entry "cn=config"
 #ldap_modify: Other (e.g., implementation specific) error (80)
+#Solved this error by switching 
+
 echo -e "dn: cn=config
 changetype: modify
-replace: olcTLSCertificateFile
-olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem
+replace: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem
 \n
 dn: cn=config
 changetype: modify
-replace: olcTLSCertificateKeyFile
-olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem" > certs.ldif
+replace: olcTLSCertificateFile
+olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem" > certs.ldif
  
 ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
 
-###Class Ends###
-   64  vim certs.ldif 
-   65  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
-   66  vim certs.ldif 
-   67  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
-   68  rm certs.ldif 
-   69  echo "dn: cn=config
-   70  changetype: modify
-   71  replace: olcTLSCertificateFile
-   72  olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem" > certs1.ldif
-   73  echo "dn: cn=config
-   74  changetype: modify
-   75  replace: olcTLSCertificateKeyFile
-   76  olcTLSCertificateKeyFile: /etc/openldap/certs/nti310ldapkey.pem" > certs2.ldif
-   77  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs1.ldif
-   78  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs2.ldif
-   79  ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs1.ldif
-   80  slaptest -u
-   81  unalias cp
-   82  ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif 
-   83  ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif 
-   84  ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif 
-   85  echo "dn: dc=nti310,dc=local
-   86  dc: nti310
-   87  objectClass: top
-   88  objectClass: domain
-   89  dn: cn=ldapadm ,dc=nti310,dc=local
-   90  objectClass: organizationalRole
-   91  cn: ldapadm
-   92  description: LDAP Manager
-   93  dn: ou=People,dc=nti310,dc=local
-   94  objectClass: organizationalUnit
-   95  ou: People
-   96  dn: ou=Group,dc=nti310,dc=local
-   97  objectClass: organizationalUnit
-   98  ou: Group" > base.ldif
-   99  ls
-  100  vim base.ldif 
-  101  ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif
-  102  vim /etc/httpd/conf.d/phpadmin.conf
-  103  vim /etc/httpd/conf.d/phpldapadmin.conf
-  104  systemctl restart httpd
-  105  journalctl -xe
-  106  vim /etc/httpd/conf.d/phpldapadmin.conf
-  107  clear
-  108  systemctl restart httpd
-  109  vim /etc/httpd/conf.d/phpldapadmin.conf
-  110  systemctl restart httpd
-  111  tail -f /var/log
-  112  tail -f /var/log/
-  113  cd /var/log/
-  114  ls
-  115  cd httpd
-  116  ls
-  117  cat error_log 
+#Test to see if cert config works
+
+slaptest -u
+echo "it works"
+
+unalias cp
+
+ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
+
+#creates group and people structure base
+
+echo -e "dn: dc=nti310,dc=local
+dc: nti310
+objectClass: top
+objectClass: domain
+\n
+dn: cn=ldapadm,dc=nti310,dc=local
+objectClass: organizationalRole
+cn: ldapadm
+description: LDAP Manager
+\n
+dn: ou=People,dc=nti310,dc=local
+objectClass: organizationalUnit
+ou: People
+\n
+dn: ou=Group,dc=nti310,dc=local
+objectClass: organizationalUnit
+ou: Group" > base.ldif
+
+setenforce 0
+
+ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_adim_pass
+
+systemctl restart httpd
+
    
