@@ -99,6 +99,7 @@ olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem" > certs.ldif
  
 ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
 
+#Test what certs are there: ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config | grep olcTLS
 #Test to see if cert config works
 
 slaptest -u
@@ -130,8 +131,11 @@ dn: ou=Group,dc=nti310,dc=local
 objectClass: organizationalUnit
 ou: Group" > base.ldif
 
+#Turn off SELinux to test
 setenforce 0
 
+#authenticate with this user and build org specifications from imported base.ldif
+#authenticate sourcing from previously created passwd w -y
 ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_adim_pass
 
 systemctl restart httpd
