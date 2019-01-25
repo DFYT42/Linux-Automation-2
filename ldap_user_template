@@ -83,3 +83,5 @@ sn: Beeblebrox
 uid: zbeeblebrox
 uidnumber: 1005
 userpassword: {SHA}IjmeQt7XATM3GuSJWO44Jkd+d2g=" > /tmp/UserAdd.ldif
+
+ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f /tmp/UserAdd.ldif -y /root/ldap_admin_pass
