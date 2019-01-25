@@ -136,7 +136,7 @@ setenforce 0
 
 #authenticate with this user and build org specifications from imported base.ldif
 #authenticate sourcing from previously created passwd w -y
-ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_adim_pass
+ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_admin_pass
 
 systemctl restart httpd
 
