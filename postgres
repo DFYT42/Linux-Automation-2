@@ -20,6 +20,21 @@ systemctl restart postgresql
 systemctl enable postgresql
 
 #change to postgres admin user that was created during install to run postgres
-sudo su -postgres
-#shell in as postgres user
+sudo -u postgres
+#su - postgres "" won't run until something is in quotes
+#shell login as postgres user to postgres database server
 psql
+#create database for Django project
+CREATE DATABASE myproject;
+#create a database user which we will use to connect to and interact with the database. Set the password to something strong and secure
+CREATE USER myprojectuser WITH PASSWORD 'password';
+#Fine tuning for db
+ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE myprojectuser SET timezone TO 'UTC';
+#give user all privileges
+GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
+#get out of database
+\q
+#logout
+exit
