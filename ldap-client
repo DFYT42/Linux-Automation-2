@@ -1,52 +1,11 @@
 #!/bin/bash
-#based off https://www.tecmint.com/configure-ldap-client-to-connect-external-authentication/ 
-#(Links to an external site.)
-#with some additions to make it work
-
-#LDAP Server: http://<ip>/phpldapadmin
-#If ldap.secret file exists, then do not run
-#if [ -e /etc/ldap.secret]; then
-
-#exit 0;
-
-#fi
-#log into root
-#sudo su
-#install packages
-#sudo apt update && sudo apt install -y libnss-ldap libpam-ldap ldap-utils nscd
-
-#Pulls up configuration screen
-#using ldap instead of ldapi (encrypted)
-#ldap://ldap-b/
-#dc=nti310,dc=local
-#cn=ldapadm,dc=nti310,dc=local
-#follow defaults
-
-#sudo auth-client-config -t nss -p lac_ldap
-#sudo pam-auth-update
-#vim /etc/pam.d/su
-#account sufficient pam_succeed_if.so uid = 0 use_uid quiet
-#can echo into file
-#echo "account sufficient pam_succeed_if.so uid = 0 use_uid quiet" >> /etc/pam.d/su
-#sed finds and replaces or adds to specific place
-#echo if it does not matter where
-
-#vim /etc/ldap/ldap.conf
-
-#looks up user names from ldap
-#getent passwd
-
-#
-
-##NEW
-#!/bin/bash
 # based off of https://www.tecmint.com/configure-ldap-client-to-connect-external-authentication
 # with some additions that make it work, as opposed to not work
 
 #If ldap.secret file exists, then do not run
 if [ -e /etc/ldap.secret]; then
 
-exit 0;
+  exit 0;
 
 fi
 
