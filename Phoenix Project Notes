@@ -60,9 +60,19 @@ Brent was pulled off everything except Phoenix and quarantined from anyone's acc
 13,14,15 of the Phoenix Project:
 
 1) What problem do they solve by only permitting code rollouts twice a day?
+-Every time they have attempted to fix a bug, they end up introducing new bugs because 
+they are using different versions and projects are colliding. By moving code rollouts to twice a day,
+developers are accountable and responsible to update information needed by other projects. Things
+are more manageable this way.
 
 2) Why are they afraid of the auditors?
+-During the work-arounds, customers credit card information is not protected and is visible. To be in compliance, 
+the company is not allowed to keep CC information--especially the CVV information. 
+They are storing the information in order to captcher sales and the auditors are in the building. 
 
 3) What is a NOC?  (It’s mentioned in the book and we’ve talked about it in class, but you may have to google it)
+-Network Operations Center. Central location for company servers and networking equipment.
 
 4) Why do Bill and Chris decide to meet once a week?
+-Dick and the board are considering outsourcing IT because Susan has made it seem all IT-related issues are the fault 
+of the IT Department. Chris and Bill decide to meet weekly to discuss how to keep this from happening.
