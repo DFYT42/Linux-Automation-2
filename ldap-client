@@ -9,14 +9,21 @@ if [ -e /etc/ldap.secret]; then
 
 fi
 
-sudo su
-
+#Do not need to sudo in bc runs as root
+#apt-get update get newest information for packages from repositories
 apt-get update
+#apt-get install installs package(s) listed
+#-y confirms the installation question, which would normally pause the install
 apt-get install -y debconf-utils
+
+#Suspend interactive GUI
 export DEBIAN_FRONTEND=noninteractive
+#install with confirmation package(s) listed
 apt-get --yes install libnss-ldap libpam-ldap ldap-utils nscd
+#activates interactive GUI so it will prompt
 unset DEBIAN_FRONTEND
 
+#write following configurations to file tempfile
 echo "ldap-auth-config ldap-auth-config/bindpw password
 nslcd nslcd/ldap-bindpw password
 ldap-auth-config ldap-auth-config/rootbindpw password
@@ -45,19 +52,24 @@ ldap-auth-config ldap-auth-config/ldapns/ldap-server string ldap://ldap-b/
 nslcd nslcd/ldap-binddn string
 ldap-auth-config ldap-auth-config/dblogin boolean false" >> tempfile
 
+#while reading configurations in tempfile, echo each line into debconf-set-selections configurations
 while read line; do echo "$line" | debconf-set-selections; done < tempfile
 
+#echo ldap server pwd to ldap secret
 echo "FfT.E2aw" > /etc/ldap.secret
 
+#elevate permissions for the ldap.secret file to read/write so the pwd can be passed for server access
 chown 600 /etc/ldap.secret
 #configures client to use ldap
 sudo auth-client-config -t nss -p lac_ldap
 #so we don't have to use a pwd to su to dif users
 echo "account sufficient pam_succeed_if.so uid = 0 use_uid quiet" >> /etc/pam.d/su
 
+#need to modify /etc/ldap.conf file with base, ldap, and rootbind info
 sed -i 's/base dc=example,dc=net/base dc=nti310,dc=local/g' /etc/ldap.conf
 sed -i 's,uri ldapi:///,uri ldap://ldap-b/,g' /etc/ldap.conf
 sed -i 's/rootbinddn cn=manager,dc=example,dc=net/rootbinddn cn=ldapadm,dcnti310,dc=local/g' /etc/ldap.conf
 
+#need to restart and enable changes to system
 systemctl restart nscd
 systemctl enable nscd
