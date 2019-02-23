@@ -3,7 +3,8 @@
 #pulling up backing for postgres Django server
 #https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-centos-7
 
-#Do not need bc installed, otherwise needed for next: sudo yum install epel-release
+#Do not need bc installed, otherwise needed for next: 
+sudo yum -y install epel-release
 #install packages gcc=gnu compiler
 yum -y install python-pip python-devel gcc postgresql-server postgresql-devel postgresql-contrib
 #initialize postgres
