@@ -37,7 +37,9 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;" >> /tmp/tempfile
 
 #become admin and run a script
 #not working right now--issue with not jumping from server to database
-sudo -u postgres "psql -f /tmp/tempfile"
+####sudo -u postgres "psql -f /tmp/tempfile"
+#current solution
+sudo -u postgres /bin/psql -f /tmp/tempfile
 
 #get out of database
 \q
