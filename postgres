@@ -46,3 +46,7 @@ sudo -u postgres /bin/psql -f /tmp/tempfile
 \q
 #logout
 exit
+
+#######Possible Issue with User postgres Login and password##########
+##Unable to log in as postgres user from reg user account requires passwd
+##if i attempt to log into postgres from reg user, cannot access postgres OR root without password
