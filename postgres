@@ -79,13 +79,15 @@ yum install -y phpPgAdmin
 ##########configure phpPgAdmin as accessible from outside:##########
 sed -i 's/Require local/Require all granted/g' /etc/httpd/conf.d/phpPgAdmin.conf
 sed -i 's/Deny from all/Allow from all/g' /etc/httpd/conf.d/phpPgAdmin.conf
-
+###need to escape brackets from search part of sed statement with \ before each bracket
+sed -i "s/$conf\['servers'\]\[0\]\['host'\] = '';/$conf['servers'][0]['host'] = 'localhost';/g" /etc/phpPgAdmin/config.inc.php
+sed -i "s/$conf\['owned_only'\] = false;/$conf\['owned_only'\] = true;/g" /etc/phpPgAdmin/config.inc.php
 ##########restarting postgres##########
 systemctl reload httpd.service
 systemctl restart postgresql
 
 ##########Go to outside ip##########
-http://<ip>/phpPgAdmin/
+#http://<ip>/phpPgAdmin/
 
 ########## ##########
 
