@@ -83,10 +83,24 @@ In one to two paragraphs summarize the technological changes that happen in this
 What changes are being made to the way Dev and Ops run things?
 
 During another outage emergency, Bill decides to slowly and methodically look at the how 
-and why of this unplanned work. CFO Dick calls Steve and accuses IT as being the cause of 
-the issue and Bill as nonplussed over the emergency. When Steve calls Bill to 
+and why of this unplanned work. He decides to let staff go home and not enact 'all hands on deck' because 
+he feels it will not saolve the problem. He decides to go home until a later comm meeting about the
+findings. CFO Dick calls Steve and accuses IT of being the cause of the issue and Bill as nonplussed over the emergency. 
+When Steve calls Bill and demands he pulls everyone in the office, Bill explains why he was methodically going for the investigative 
+approach. Steve gets angry and tries to micromanage Bill and Bill stands his ground, refusing to stay stuck in the same 
+mode of operation. Steve refuses to listen and Bill quits.
 
 20, 21, 22, and 23 of the Phoenix Project:
 
 In 1-2 paragraphs, summarize how work changed in these chapters.  
 What workflow changes were made and what were the results?
+
+After a few days of all hell breaking loose with Steve trying to micromanage the emergency, Erik and the board step in to give Steve 
+an ultimatum: change or go. Steve calls Bill to beg him back and Bill agrees. Steve's first action is to call all the IT heads into a 
+feely-touchy, getting-to-know you, plan-of-action meeting. They take a big step and stop all except Phoenix and whatever work is
+already in progress. The idea is to decrese work in progress in order to increase output. Chris is going to keep developers from 
+throwing their work toward the IT bottleneck and divert whatever personnell can be diverted to the Phoenix project for a two-week 
+period. This will also enable more IT Operations folks to be more involved in the pipeline because everything will not solely 
+depend on Brent.
+
+While some project owners were upset about their projects being put on hold, Phoenix was being fixed 
