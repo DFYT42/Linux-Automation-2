@@ -2,6 +2,7 @@
 ###micro/CentOS/Http&Https bc interacting with website
 ##########SETTING UP BACKEND DB FOR POSTGRES DJANGO SERVER##########
 ##########BASED ON##########
+###Django is python
 ###https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-centos-7
 ###https://www.vultr.com/docs/install-phppgadmin-on-centos-7
 
