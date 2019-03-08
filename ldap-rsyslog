@@ -31,6 +31,8 @@ sed -i 's/#$Input/TCPServerRun 514/$Input/TCPServerRun 514/g' /etc/rsyslog.conf
 #& ~
 
 systemctl restart rsyslog
+#see tcp, udp, listening, number, port and look for rsyslog
+ss -tulnp | grep "rsyslog"
 
 #interface w SELinux but not working
 sudo semanage -a -t syslogd_port_t -p udp 514
