@@ -46,3 +46,7 @@ sudo systemctl enable rsyslog
 #on the client
 #add to end of file
 echo "*.* @@ldap-rsyslog-1:514" >> /etc/rsyslog.conf
+#subnet
+#10.142.0.0/32
+python manage.py makemigrations
+python manage.py migrate
