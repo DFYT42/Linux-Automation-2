@@ -3,7 +3,7 @@
 #GCloud
 ##TEST
 ##sudo su
-tail -f /var/messages
+#tail -f /var/messages
 
 #already has git installed
 #Setup for final
