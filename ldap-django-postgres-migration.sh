@@ -10,7 +10,7 @@ pip install --upgrade pip
 mkdir ~/myproject && cd ~/myproject
 ##install virtual python envitroinment to safely upgrade system python whenever we need to 
 #creates that environment for us and change into environment
-virtualenve myprojectenv
+virtualenv myprojectenv
 source myprojectenv/bin/activate
 #install Django with pip and install the psycopg2 package to us use the database configured
 pip install django psycopg2
