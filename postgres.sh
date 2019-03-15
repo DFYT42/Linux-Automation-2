@@ -17,7 +17,7 @@ postgresql-setup initdb
 systemctl start postgresql
 ##########EDIT CONFIG FILE AUTHENTICATION MODE TO MD5##########
 ###spaces important
-vim /var/lib/pgsql/data/pg_hba.conf
+#vim /var/lib/pgsql/data/pg_hba.conf
 sed -i 's,host    all             all             127.0.0.1/32            ident,host    all             all             127.0.0.1/32            md5,g' /var/lib/pgsql/data/pg_hba.conf
 sed -i 's,host    all             all             ::1/128                 ident,host    all             all             ::1/128                 md5,g' /var/lib/pgsql/data/pg_hba.conf
 ##########RESTART POSTGRES SERVICE##########
@@ -25,6 +25,7 @@ systemctl restart postgresql
 ##########ENABLE POSTGRES SERVICE##########
 systemctl enable postgresql
 
+echo "configuring PG admin"
 ##########CHANGE TO POSTGRES ADMIN USER THAT WAS CREATED DURING INSTALL TO RUN POSTGRES##########
 ####su - postgres "" won't run until something is in quotes
 ###shell login as postgres user to postgres database server
@@ -48,6 +49,7 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;" >> /tmp/tempfile
 ###changing into postgres user andrunning psql program to execute tempfile
 sudo -u postgres /bin/psql -f /tmp/tempfile
 
+echo "installing httpd"
 ##########Install Apache Web Server##########
 yum install -y httpd
 systemctl start httpd
