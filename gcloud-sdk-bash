@@ -1,6 +1,9 @@
 #!/bin/bash
 ##https://github.com/nic-instruction/hello-nti-310/blob/master/automate.md
 #GCloud
+##TEST
+##sudo su
+tail -f /var/messages
 
 #already has git installed
 #Setup for final
@@ -23,4 +26,8 @@ gcloud compute instances create postgres-server2 \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform
-##Not for first one: --metadata-from-file startup-script=/path/to/script.sh
+--metadata-from-file startup-script=Linux-Automation-2/postgres.sh
+
+
+
+
