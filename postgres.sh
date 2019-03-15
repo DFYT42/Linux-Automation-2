@@ -84,7 +84,7 @@ sed -i 's/Deny from all/Allow from all/g' /etc/httpd/conf.d/phpPgAdmin.conf
 sed -i "s/$conf\['servers'\]\[0\]\['host'\] = '';/$conf['servers'][0]['host'] = 'localhost';/g" /etc/phpPgAdmin/config.inc.php
 sed -i "s/$conf\['owned_only'\] = false;/$conf\['owned_only'\] = true;/g" /etc/phpPgAdmin/config.inc.php
 ##########restarting postgres##########
-systemctl reload httpd.service
+systemctl restart httpd.service
 systemctl restart postgresql
 
 ##########Go to outside ip##########
