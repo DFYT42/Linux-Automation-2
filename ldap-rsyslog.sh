@@ -52,5 +52,5 @@ sudo semanage -a -t syslogd_port_t -p tcp 514
 #echo "*.* @@ldap-rsyslog-1:514" >> /etc/rsyslog.conf
 
 
-sudo systemctl status rsyslog
-tail -f /var/log/messages
+#sudo systemctl status rsyslog
+#tail -f /var/log/messages
