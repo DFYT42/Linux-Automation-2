@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 ###micro/CentOS/Http&Https bc interacting with website
 ##########SETTING UP BACKEND DB FOR POSTGRES DJANGO SERVER##########
 ##########BASED ON##########
