@@ -266,4 +266,15 @@ ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f /tmp/UserAdd.ldif -y /root/l
 
 systemctl restart httpd
 
+#setting up machine to run as client rsyslog to server rsyslog
+#install this on a server
+#rsyslog should be first server sun up
+#client automation
+sudo yum update -y && yum install -y rsyslog 	#CentOS 7
+sudo systemctl start rsyslog
+sudo systemctl enable rsyslog
+#on the client
+#add to end of file
+echo "*.* @@ldap-rsyslog-1:514" >> /etc/rsyslog.conf
+
    
