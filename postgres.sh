@@ -89,6 +89,17 @@ sed -i "s/$conf\['owned_only'\] = false;/$conf\['owned_only'\] = true;/g" /etc/p
 systemctl restart httpd.service
 systemctl restart postgresql
 
+#setting up machine to run as client rsyslog to server rsyslog
+#install this on a server
+#rsyslog should be first server sun up
+#client automation
+sudo yum update -y && yum install -y rsyslog 	#CentOS 7
+sudo systemctl start rsyslog
+sudo systemctl enable rsyslog
+#on the client
+#add to end of file
+echo "*.* @@ldap-rsyslog-1:514" >> /etc/rsyslog.conf
+
 ##########Go to outside ip##########
 #http://<ip>/phpPgAdmin/
 
