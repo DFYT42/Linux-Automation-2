@@ -44,12 +44,12 @@ sudo semanage -a -t syslogd_port_t -p tcp 514
 #install this on a server
 #rsyslog should be first server sun up
 #client automation
-sudo yum update -y && yum install -y rsyslog 	#CentOS 7
-sudo systemctl start rsyslog
-sudo systemctl enable rsyslog
+#sudo yum update -y && yum install -y rsyslog 	#CentOS 7
+#sudo systemctl start rsyslog
+#sudo systemctl enable rsyslog
 #on the client
 #add to end of file
-echo "*.* @@ldap-rsyslog-1:514" >> /etc/rsyslog.conf
+#echo "*.* @@ldap-rsyslog-1:514" >> /etc/rsyslog.conf
 
 
 sudo systemctl status rsyslog
