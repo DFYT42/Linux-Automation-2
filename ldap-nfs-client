@@ -73,3 +73,11 @@ sed -i 's/rootbinddn cn=manager,dc=example,dc=net/rootbinddn cn=ldapadm,dc=nti31
 #need to restart and enable changes to system
 systemctl restart nscd
 systemctl enable nscd
+
+###NFS CLIENT###
+apt-get install nfs-client
+
+showmount -e <nfs server name>
+mkdir /mnt/test
+echo "10.142.0.3/var/nfsshare/testing       /mnt/test   nfs  defaults 0 0" >> /etc/fstab
+mount -a
