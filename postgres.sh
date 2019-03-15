@@ -18,7 +18,8 @@ systemctl start postgresql
 ##########EDIT CONFIG FILE AUTHENTICATION MODE TO MD5##########
 ###spaces important
 #vim /var/lib/pgsql/data/pg_hba.conf
-sed -i 's,host    all             all             127.0.0.1/32            ident,host    all             all             127.0.0.1/32            md5,g' /var/lib/pgsql/data/pg_hba.conf
+#sed -i 's,host    all             all             127.0.0.1/32            ident,host    all             all             127.0.0.1/32            md5,g' /var/lib/pgsql/data/pg_hba.conf
+sed -i 's,host    all             all             127.0.0.1/32            ident,host    all             all             0.0.0.0/0               md5,g' /var/lib/pgsql/data/pg_hba.conf
 sed -i 's,host    all             all             ::1/128                 ident,host    all             all             ::1/128                 md5,g' /var/lib/pgsql/data/pg_hba.conf
 ##########RESTART POSTGRES SERVICE##########
 systemctl restart postgresql
