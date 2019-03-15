@@ -3,11 +3,12 @@
 ##########BASED ON##########
 ###based on tutorial: https://github.com/nic-instruction/hello-nti-310/blob/master/postgres.md
 ###https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-centos-7
-sudo su
+#sudo su
 yum install -y python-pip
 pip install virtualenv
 pip install --upgrade pip
-mkdir ~/myproject && cd ~/myproject
+mkdir ~/myproject
+cd ~/myproject
 ##install virtual python envitroinment to safely upgrade system python whenever we need to 
 #creates that environment for us and change into environment
 virtualenv myprojectenv
