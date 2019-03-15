@@ -16,7 +16,7 @@ gcloud compute instances create rsyslog-server2 \
 --machine-type f1-micro \
 --scopes cloud-platform
 ##Not for first one: --metadata-from-file startup-script=/path/to/script.sh
-gcloud compute instances create rsyslog-server3 \
+gcloud compute instances create postgres-server2 \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-east1-b \
