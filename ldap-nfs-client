@@ -77,7 +77,7 @@ systemctl enable nscd
 ###NFS CLIENT###
 apt-get install nfs-client
 
-showmount -e <nfs server name>
+showmount -e nfs_server_automation-test
 mkdir /mnt/test
 echo "10.142.0.3/var/nfsshare/testing       /mnt/test   nfs  defaults 0 0" >> /etc/fstab
 mount -a
