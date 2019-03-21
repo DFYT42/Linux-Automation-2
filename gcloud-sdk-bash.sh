@@ -34,7 +34,7 @@ gcloud compute instances create nti310-final-postgres \
 gcloud compute instances create nti310-final-ldapserver \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-east1-b \
+--zone us-west1-a \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -44,7 +44,7 @@ gcloud compute instances create nti310-final-ldapserver \
 #gcloud compute instances create nti310-final-nfsserver \
 #--image-family centos-7 \
 #--image-project centos-cloud \
-#--zone us-east1-b \
+#--zone us-west1-a \
 #--tags "http-server","https-server" \
 #--machine-type f1-micro \
 #--scopes cloud-platform \
@@ -54,7 +54,7 @@ gcloud compute instances create nti310-final-ldapserver \
 #gcloud compute instances create nti310-final-django-the-j-is-silent-server \
 #--image-family centos-7 \
 #--image-project centos-cloud \
-#--zone us-east1-b \
+#--zone us-west1-a \
 #--tags "http-server","https-server" \
 #--machine-type f1-micro \
 #--scopes cloud-platform \
