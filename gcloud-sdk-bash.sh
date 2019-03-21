@@ -54,14 +54,14 @@ gcloud compute instances create nti310-final-nfsserver \
 sleep 30s
 
 ##DJANGOSERVER##
-#gcloud compute instances create nti310-final-django-the-j-is-silent-server \
-#--image-family centos-7 \
-#--image-project centos-cloud \
-#--zone us-west1-a \
-#--tags "http-server","https-server" \
-#--machine-type f1-micro \
-#--scopes cloud-platform \
-#--metadata-from-file startup-script=nfs_server_automation.sh
+gcloud compute instances create nti310-final-django-the-j-is-silent-server \
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-west1-a \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=ldap-django-postgres-migration.sh
 
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
