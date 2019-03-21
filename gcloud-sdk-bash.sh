@@ -29,7 +29,7 @@ gcloud compute instances create nti310-final-postgres \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=DFYT42/Linux-Automation-2/postgres.sh
+--metadata-from-file startup-script=postgres.sh
 
 ##LDAPSERVER##
 #gcloud compute instances create nti310-final-ldapserver \
