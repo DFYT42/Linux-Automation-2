@@ -1,21 +1,33 @@
 #!/bin/bash
 
+#install git
 yum install -y git
+
+#cd into the tmp directory
 cd /tmp
+
+#clone personal repo from github
 git clone https://github.com/DFYT42/Linux-Automation-2
 
+#install server and client version of ldap software
 yum -y install openldap-servers openldap-clients
 
+#copy first software configuration in its primary installed location to second location
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+
 #giving ownership from root to ldap bc ldap has to be owner of ldap daemon to get info
 chown ldap. /var/lib/ldap/DB_CONFIG 
 
-#ldap daemon
+#enables ldap daemon slapd
 systemctl enable slapd
+
+#startsldap daemon slapd
 systemctl start slapd
 
-#apache server
+#install apache server
 yum -y install httpd
+
+#install web app for ldap server administration
 yum -y install phpldapadmin
 
 #Let's SELinux - know what is going on
@@ -23,28 +35,45 @@ yum -y install phpldapadmin
 #Apache connecct to ldap
 setsebool -P httpd_can_connect_ldap on
 
+#enables apache
 systemctl enable httpd
+
+#starts apache
 syetmctl start httpd
 
-#modifies our httpd.conf to access from external URL
+#modifies our httpd.conf to access from external URL/apache server
 sed -i 's,Require local,#Require local\n  Require all granted,g' /etc/httpd/conf.d/phpldapadmin.conf
+
+#unalias cp because means something different than copy
 unalias cp
 
 #making backup in case something goes wrong
 cp /etc/phpldapadmin/config.php /etc/phpldapadmin/config.php.orig
 
+#copy config file from github repo as config file for phpladap admin web adminsitartion
 cp /tmp/DFYT42/Linux-Automation-2/config.php /etc/phpldapadmin/config.php
+
+#changes ownership of ldap:apache to local phpldapadmin
 chown ldap:apache /etc/phpldapadmin/config.php
 
+#restarts service after changing ownership
 systemctl restart httpd.service
 
+#making sure my stuff is working
 echo "phpldapadmin is now up and running"
+#making sure my stuff is working still
 echo "we are configuring ldap and ldap admin"
 
 #Generates and stores new passwords & restricts only root user to read
 newsecret=$(slappasswd -g)
+
+#stores password securely
 newhash=$(slappasswd -s "$newsecret")
+
+#sends passwd to root
 echo -n "$newsecret" > /root/ldap_admin_pass
+
+#
 chmod 0600 /root/ldap_admin_pass
 
 #Becomes ldif and configures root domain
