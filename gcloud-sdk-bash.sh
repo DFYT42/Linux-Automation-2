@@ -15,7 +15,6 @@ gcloud compute instances create nti310-final-logserver \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west1-a \
-#--tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=ldap-rsyslog.sh
