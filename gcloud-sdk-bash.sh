@@ -83,6 +83,6 @@ sleep 30s
 #--tags "http-server","https-server" \
 #--machine-type f1-micro \
 #--scopes cloud-platform \
-#--metadata-from-file startup-script=nfs_client_automation.sh
+#--metadata-from-file startup-script=ldap-client-automation.sh
 
 
