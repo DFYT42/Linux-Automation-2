@@ -5,14 +5,17 @@ yum install -y nfs-utils
 
 ############CREATE PLACE TO HOUSE STUFF############
 mkdir /var/nfsshare /var/nfsshare/devstuff /var/nfsshare/testing /var/nfsshare/home_dirs
+
 ############OPEN TO ALL FOR PROBLEM SOLVING: READING, WRITING, EXECUTING############
 ###enables root to read through newly
 chmod -R 777 /var/nfsshare/
+
 ############ENABLE AND STARTING SERVICES TO RUN AT BOOT############
 for service in rpcbind nfs-server nfs-lock nfs-idmap; do echo "systemctl enable $service"; done
 for service in rpcbind nfs-server nfs-lock nfs-idmap; do systemctl start $service; done
 for service in rpcbind nfs-server nfs-lock nfs-idmap; do systemctl enable $service; done
 for service in rpcbind nfs-server nfs-lock nfs-idmap; do systemctl start $service; done
+
 ############SHARE NFS DIRECTORY WITH NETWORK############
 cd /var/nfsshare/
 echo "/var/nfsshare/home_dirs *(rw,sync,no_all_squash)
