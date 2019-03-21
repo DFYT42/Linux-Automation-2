@@ -32,14 +32,14 @@ gcloud compute instances create nti310-final-postgres \
 --metadata-from-file startup-script=postgres.sh
 
 ##LDAPSERVER##
-#gcloud compute instances create nti310-final-ldapserver \
-#--image-family centos-7 \
-#--image-project centos-cloud \
-#--zone us-east1-b \
-#--tags "http-server","https-server" \
-#--machine-type f1-micro \
-#--scopes cloud-platform \
-#--metadata-from-file startup-script=ldap-server.sh
+gcloud compute instances create nti310-final-ldapserver \
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-east1-b \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=ldap-server.sh
 
 ##NFSSERVER##
 #gcloud compute instances create nti310-final-nfsserver \
