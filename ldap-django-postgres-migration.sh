@@ -37,16 +37,17 @@ perl -i -pe 's/DATABASES = {
     }
 }/g' ~/myproject/myproject/settings.py
 
-#setting up machine to run as client rsyslog to server rsyslog
+#setting up machine to run as rsyslog client to server rsyslog
 #install this on a server
-#rsyslog should be first server sun up
-#client automation
+#rsyslog should be first server run up
+#rsyslog client automation
 sudo yum update -y && yum install -y rsyslog 	#CentOS 7
 sudo systemctl start rsyslog
 sudo systemctl enable rsyslog
-#on the client
+#on the rsyslog client
 #add to end of file
 echo "*.* @@ldap-rsyslog-1:514" >> /etc/rsyslog.conf
+
 #subnet
 #10.142.0.0/32
 python manage.py makemigrations
