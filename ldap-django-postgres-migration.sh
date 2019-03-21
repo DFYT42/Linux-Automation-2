@@ -19,24 +19,6 @@ pip install django psycopg2
 #and will create a management script within the current directory
 django-admin.py startproject myproject .
 
-#vim ~/myproject/myproject/settings.py
-#below cannot be sed or perled in
-perl -i -pe 's/DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}/DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myproject',
-        'USER': 'myprojectuser',
-        'PASSWORD': 'password',
-        'HOST': 'postgres-b',
-        'PORT': '5432',
-    }
-}/g' ~/myproject/myproject/settings.py
-
 #setting up machine to run as rsyslog client to server rsyslog
 #install this on a server
 #rsyslog should be first server run up
@@ -52,3 +34,5 @@ echo "*.* @@ldap-rsyslog-1:514" >> /etc/rsyslog.conf
 #10.142.0.0/32
 python manage.py makemigrations
 python manage.py migrate
+
+wget -O ~/myproject/myproject/settings.py https://github.com/DFYT42/Linux-Automation-2/blob/master/settings.py
