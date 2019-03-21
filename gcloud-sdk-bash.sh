@@ -18,7 +18,7 @@ gcloud compute instances create nti310-final-logserver \
 #--tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=https://github.com/DFYT42/Linux-Automation-2/ldap-rsyslog.sh
+--metadata-from-file startup-script=ldap-rsyslog.sh
 sleep 30s
 
 ##POSTGRES##
