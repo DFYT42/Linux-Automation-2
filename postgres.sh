@@ -8,7 +8,7 @@
 
 ##########DO NOT NEED FOR MANUAL BC ALREADY INSTALLED##########
 ##########ONLY FOR AUTOMATION########## 
-sudo yum -y install epel-release
+yum -y install epel-release
 ##########INSTALL PACKAGES GCC=GNU COMPILER##########
 yum -y install python-pip python-devel gcc postgresql-server postgresql-devel postgresql-contrib
 ##########INITIALIZE POSTGRES##########
