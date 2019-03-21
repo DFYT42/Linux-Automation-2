@@ -29,6 +29,7 @@ gcloud compute instances create nti310-final-postgres \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=postgres.sh
+sleep 30s
 
 ##LDAPSERVER##
 gcloud compute instances create nti310-final-ldapserver \
@@ -39,16 +40,18 @@ gcloud compute instances create nti310-final-ldapserver \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=ldap-server.sh
+sleep 30s
 
 ##NFSSERVER##
-#gcloud compute instances create nti310-final-nfsserver \
-#--image-family centos-7 \
-#--image-project centos-cloud \
-#--zone us-west1-a \
-#--tags "http-server","https-server" \
-#--machine-type f1-micro \
-#--scopes cloud-platform \
-#--metadata-from-file startup-script=nfs_server_automation.sh
+gcloud compute instances create nti310-final-nfsserver \
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-west1-a \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=nfs_server_automation.sh
+sleep 30s
 
 ##DJANGOSERVER##
 #gcloud compute instances create nti310-final-django-the-j-is-silent-server \
@@ -62,8 +65,24 @@ gcloud compute instances create nti310-final-ldapserver \
 
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
+#gcloud compute instances create nti310-final-nfs-client \
+#--image-family ubuntu-1804-lts \
+#--image-project ubuntu-os-cloud \
+#--zone us-west1-a \
+#--tags "http-server","https-server" \
+#--machine-type f1-micro \
+#--scopes cloud-platform \
+#--metadata-from-file startup-script=nfs_client_automation.sh
 
 ##CLIENTLDAP##
 #Ubuntu 1804 LTS#
+#gcloud compute instances create nti310-final-nfs-client \
+#--image-family ubuntu-1804-lts \
+#--image-project ubuntu-os-cloud \
+#--zone us-west1-a \
+#--tags "http-server","https-server" \
+#--machine-type f1-micro \
+#--scopes cloud-platform \
+#--metadata-from-file startup-script=nfs_client_automation.sh
 
 
