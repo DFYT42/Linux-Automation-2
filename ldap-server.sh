@@ -73,10 +73,12 @@ newhash=$(slappasswd -s "$newsecret")
 #sends passwd to root
 echo -n "$newsecret" > /root/ldap_admin_pass
 
-#
+#gives read write access
 chmod 0600 /root/ldap_admin_pass
 
 #Becomes ldif and configures root domain
+#is local
+#takes old password and replaces with new
 echo -e "dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcSuffix
@@ -92,20 +94,22 @@ changetype: modify
 replace: olcRootPW
 olcRootPW: $newhash" > db.ldif
 
+#format to exchange and sync data
 ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
 
-#Auth restriction
-
+#Auth restriction from external
 echo 'dn: olcDatabase={1}monitor,cn=config
 changetype: modify
 replace: olcAccess
 olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base="cn=ldapadm,dc=nti310,dc=local" read by * none' > monitor.ldif
 
+#format to exchange and sync data
 ldapmodify -Y EXTERNAL -H ldapi:/// -f monitor.ldif
 
 #Generates Certs
 openssl req -new -x509 -nodes -out /etc/openldap/certs/nti310ldapcert.pem -keyout /etc/openldap/certs/nti310ldapkey.pem -days 365 -subj "/C=US/ST=WA/L=Seattle/O=SCC/OU=IT/CN=nti310.local"
 
+#change ownership from ldap to local etc/.../cert file location
 chown -R ldap. /etc/openldap/certs/nti*.pem
 
 ##Error [root@ldap-b tmp]# ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
@@ -116,6 +120,7 @@ chown -R ldap. /etc/openldap/certs/nti*.pem
 #ldap_modify: Other (e.g., implementation specific) error (80)
 #Solved this error by switching 
 
+#put keys inside ldap
 echo -e "dn: cn=config
 changetype: modify
 replace: olcTLSCertificateKeyFile
@@ -125,22 +130,31 @@ dn: cn=config
 changetype: modify
 replace: olcTLSCertificateFile
 olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem" > certs.ldif
- 
+
+##format to exchange and sync data
 ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
 
 #Test what certs are there: ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config | grep olcTLS
 #Test to see if cert config works
 slaptest -u
+
+#let's us know it's working 
 echo "it works"
 
+#changes cp alias
 unalias cp
 
+##format to exchange and sync data
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
+
+##format to exchange and sync data
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
+
+##format to exchange and sync data
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
 
 #creates group and people structure base
-
+#base.dif needs spaces but can't VIM during automation...so echo
 echo -e "dn: dc=nti310,dc=local
 dc: nti310
 objectClass: top
@@ -193,6 +207,7 @@ gidnumber: 502
 objectclass: posixGroup
 objectclass: top" > /tmp/GroupAdd.ldif
 
+#reads password and passes through
 ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f /tmp/GroupAdd.ldif -y /root/ldap_admin_pass
 
 #Create users
@@ -291,8 +306,10 @@ uid: zbeeblebrox
 uidnumber: 1005
 userpassword: {SHA}IjmeQt7XATM3GuSJWO44Jkd+d2g=" > /tmp/UserAdd.ldif
 
+#reads password and passes through
 ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f /tmp/UserAdd.ldif -y /root/ldap_admin_pass
 
+#restart web application/apache
 systemctl restart httpd
 
 #setting up machine to run as client rsyslog to server rsyslog
