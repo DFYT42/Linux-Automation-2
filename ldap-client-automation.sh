@@ -33,7 +33,7 @@ nslcd nslcd/ldap-starttls boolean false
 libpam-runtime libpam-runtime/profiles multiselect unix, ldap, systemd, capability
 nslcd nslcd/ldap-sasl-authzid string
 ldap-auth-config ldap-auth-config/rootbinddn string cn=ldapadm,dc=nti310,dc=local
-nslcd nslcd/ldap-uris string ldap://ldap-b/
+nslcd nslcd/ldap-uris string ldap://nti310-final-ldapserver/
 nslcd nslcd/ldap-reqcert select
 nslcd nslcd/ldap-sasl-secprops string
 ldap-auth-config ldap-auth-config/ldapns/ldap_version select 3
