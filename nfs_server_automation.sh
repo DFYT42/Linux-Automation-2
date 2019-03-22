@@ -4,7 +4,10 @@
 yum install -y nfs-utils
 
 ############CREATE PLACE TO HOUSE STUFF############
-mkdir /var/nfsshare /var/nfsshare/devstuff /var/nfsshare/testing /var/nfsshare/home_dirs
+mkdir /var/nfsshare 
+mkdir /var/nfsshare/devstuff 
+mkdir /var/nfsshare/testing 
+mkdir /var/nfsshare/home_dirs
 
 ############OPEN TO ALL FOR PROBLEM SOLVING: READING, WRITING, EXECUTING############
 ###enables root to read through newly
