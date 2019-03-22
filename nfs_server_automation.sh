@@ -26,7 +26,7 @@ echo "/var/nfsshare/home_dirs *(rw,sync,no_all_squash)
 /var/nfsshare/testing *(rw,sync,no_all_squash)" >> /etc/exports
 systemctl restart nfs-server
 yum -y install net-tools
-showmount -e $ipaddress
+##showmount -e $ipaddress
 
 #setting up machine to run as rsyslog client to server rsyslog
 #install this on a server
