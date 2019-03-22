@@ -51,7 +51,7 @@ unalias cp
 cp /etc/phpldapadmin/config.php /etc/phpldapadmin/config.php.orig
 
 #copy config file from github repo as config file for phpladap admin web adminsitartion
-cp /tmp/DFYT42/Linux-Automation-2/config.php /etc/phpldapadmin/config.php
+cp /tmp/Linux-Automation-2/config.php /etc/phpldapadmin/config.php
 
 #changes ownership of ldap:apache to local phpldapadmin
 chown ldap:apache /etc/phpldapadmin/config.php
