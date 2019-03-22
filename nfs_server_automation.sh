@@ -1,7 +1,8 @@
 #!/bin/bash
 ############AUTOMATE NFS SERVER INSTALL############
 ###https://www.howtoforge.com/nfs-server-and-client-on-centos-7
-yum install -y nfs-utils
+yum -y install nfs-utils
+
 
 ############CREATE PLACE TO HOUSE STUFF############
 mkdir /var/nfsshare 
@@ -14,10 +15,18 @@ mkdir /var/nfsshare/home_dirs
 chmod -R 777 /var/nfsshare/
 
 ############ENABLE AND STARTING SERVICES TO RUN AT BOOT############
-for service in rpcbind nfs-server nfs-lock nfs-idmap; do echo "systemctl enable $service"; done
-for service in rpcbind nfs-server nfs-lock nfs-idmap; do systemctl start $service; done
-for service in rpcbind nfs-server nfs-lock nfs-idmap; do systemctl enable $service; done
-for service in rpcbind nfs-server nfs-lock nfs-idmap; do systemctl start $service; done
+#for service in rpcbind nfs-server nfs-lock nfs-idmap; do echo "systemctl enable $service"; done
+#for service in rpcbind nfs-server nfs-lock nfs-idmap; do systemctl start $service; done
+#for service in rpcbind nfs-server nfs-lock nfs-idmap; do systemctl enable $service; done
+#for service in rpcbind nfs-server nfs-lock nfs-idmap; do systemctl start $service; done
+systemctl enable rpcbind
+systemctl enable nfs-server
+systemctl enable nfs-lock
+systemctl enable nfs-idmap
+systemctl start rpcbind
+systemctl start nfs-server
+systemctl start nfs-lock
+systemctl start nfs-idmap
 
 ############SHARE NFS DIRECTORY WITH NETWORK############
 cd /var/nfsshare/
