@@ -3,11 +3,11 @@
 # with some additions that make it work, as opposed to not work
 
 #If ldap.secret file exists, then do not run
-#if [ -e /etc/ldap.secret]; then
-#
-#  exit 0;
-#
-#fi
+if [ -e /etc/ldap.secret]; then
+
+  exit 0;
+
+fi
 
 #Do not need to sudo in bc runs as root
 #apt-get update get newest information for packages from repositories
