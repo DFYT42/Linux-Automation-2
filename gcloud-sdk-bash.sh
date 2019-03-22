@@ -67,7 +67,7 @@ sleep 30s
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
 gcloud compute instances create nti310-final-nfs-client \
---image-family ubuntu-18.04-lts \
+--image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
 --zone us-west1-a \
 --tags "http-server","https-server" \
