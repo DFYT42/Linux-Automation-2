@@ -99,7 +99,7 @@ sudo systemctl start rsyslog
 sudo systemctl enable rsyslog
 #on the rsyslog client
 #add to end of file
-echo "*.* @@ldap-rsyslog-1:514" >> /etc/rsyslog.conf
+echo "*.* @@nti310-final-logserver:514" >> /etc/rsyslog.conf
 
 ##########Go to outside ip##########
 #http://<ip>/phpPgAdmin/
