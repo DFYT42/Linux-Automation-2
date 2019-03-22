@@ -62,6 +62,7 @@ gcloud compute instances create nti310-final-django-the-j-is-silent-server \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=ldap-django-postgres-migration.sh
+sleep 30s
 
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
@@ -73,6 +74,7 @@ gcloud compute instances create nti310-final-nfs-client \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=nfs_client_automation.sh
+sleep 30s
 
 ##CLIENTLDAP##
 #Ubuntu 1804 LTS#
