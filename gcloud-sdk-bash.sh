@@ -85,4 +85,3 @@ gcloud compute instances create nti310-final-nfs-client \
 --scopes cloud-platform \
 --metadata-from-file startup-script=ldap-client-automation.sh
 
-
