@@ -77,7 +77,7 @@ sleep 30s
 
 ##CLIENTLDAP##
 #Ubuntu 1804 LTS#
-gcloud compute instances create nti310-final-nfs-client2 \
+gcloud compute instances create nti310-final-ldap-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
 --zone us-west1-a \
