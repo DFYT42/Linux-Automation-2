@@ -32,3 +32,5 @@ JAMIE K BEACH, Mar 25 at 5:40pm
 Of course...I am not happy to hear about the logserver bc I totally thought mine was good and I was super happy about it...but that's the nature of this. :P Will work on that too.
 JAMIE K BEACH, Mar 25 at 5:42pm
 Thank you for being so on top of everything!  Give yourself a break too, you've earned it.  Grading out your other submissions now!
+
+You don't need \q and exit at the end, the sudo command we're using will take care of all that for you!  Other than that, looks great!
