@@ -113,4 +113,25 @@ maxamize flow of work, which means monitoring utilization. The higher utilizatio
 if a project will increase value to work flow or security or scalability or throughput. This will be done with the project audit team 
 reviewing projects alla kanban boards and deciding their importance that way.
 
+24, 25, 26, and 27 of the Phoenix Project:
+In 1-2 paragraphs, summarize how work changed in these chapters.  What workflow changes were made and what were the results?
+
+These four chapters show us the bigger picture, as it's been understood by upper managemenr, and how it is beginning to be understood
+by John and the IT team. Both Bill and John begin to undrestand that executives have many company goals that depend on IT but are not 
+concise as to exactly what depends on IT or why. This is where Bill begins to understand his need to discover where he has under-scoped 
+IT: what actually jeopardizes the business as a whole. Too, he needs to work with Jon to discover where he has over-scoped IT: what is
+actually needed of Jon's projects and what are just busy work that does not further the business. Erik introduces the 'Coso Cube', which
+focus on internal control objectives.Jon and Bill go to every business process owner on Dick's org list and find out exactly what is 
+dependent on IT. Jon also learns what the control environment actually looks like--not just his idea of what is needed. 
+What are the value chains?
+
+After interviewing just two directors, Jon and Bill call a meeting with Wes, Patty, and Chris. They come up with a Business Outcomes table
+that allows them to see: performance measure, area of it reliance, business risk due to IT, and IT controls relied upon. They really utilize 
+the three legged security concept of CIA, (confidentiality, integrity, and availability). With this information, they get Dick to bring IT 
+into an area of focus. Previously IT had not been a management business risk area of interest and yet every other area depends on IT.
+Further, Jon decides to scrap the entire auditing process, after discovering the IT auditing process was entirely out of scope for any internal 
+or financial audits. If it was out of scope, it is pointless bisy work.
+
+In short, by finding where IT risks and busy work occur, they can take steps to reduce technical debt.
+
 
