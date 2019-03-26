@@ -55,3 +55,42 @@ What does it do?
 
 -Uses authenticated tickets to access applications/resources, as long as ticket is valid,
 and users do not have to reauthenticate every time
+
+Answer the following questions:
+
+1) What is NFS?
+-Network File System
+-Remote file system that users and programs can access common files
+
+2) What is Samba?
+-Windows component
+-integrates Unix devices into AD environments
+-can be a domain controller or member
+
+3) When would you use an NFS system and when would you use a SMB system for your network?
+-NFS for Unix/Linux
+-SMB for Windows
+
+4) What is the purpose of centralizing files on a network file system?
+-multiple users, devices, or programs can access the same files remotely and from different systems
+
+5) How does LDAP integrate with NFS?
+-LDAP provides authentication
+
+6) What does "stateful" mean?  What about "stateless"?
+-statefull 
+--connections remain open and logs activity
+--maintains original input and all subsequent input for all output
+-stateless do not maintain the connection or historical inout information
+
+7) What are some of the benefits of using NFS4 over NFS3?
+-Security
+-ease of use because do not need as many protocols to bind to
+
+8) What do nfsstat and netstat each do?
+-nfsstat - shows statistics abouut the nfs server
+-netstat - displays TCP connections, routing, networking, ports in all their states, etc.
+
+9) What is automounting?  Why is it used?
+-automounting is when file systems are automatically installed based on anither programs activities
+-is used to autoinstall and complete installations, when programs are found missing, to complete the task
