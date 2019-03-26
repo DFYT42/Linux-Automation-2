@@ -1,0 +1,34 @@
+Postgres is up and running.
+Nicole Bade, Mar 21 at 7:21pm
+ldap is up and running
+Nicole Bade, Mar 21 at 7:21pm
+ldap client
+Nicole Bade, Mar 21 at 7:25pm
+Hi Jamie, your ldap client is still pointing to your nfs client instead of the LDAP server....
+Nicole Bade, Mar 25 at 11:01am
+# Another way to specify your LDAP server is to provide an
+uri ldap://nti310-final-nfs-client
+Nicole Bade, Mar 25 at 11:01am
+so your client isn't working...
+Nicole Bade, Mar 25 at 11:01am
+Your NFS client is fine, your NFS server is not properly configured.
+Nicole Bade, Mar 25 at 11:10am
+-5 for the ldap client, -10 for the NFS server.
+Nicole Bade, Mar 25 at 11:14am
+Your PG server looks great!  Your Django server did not complete the migration.  -5
+Nicole Bade, Mar 25 at 11:17am
+love the name of your django server!!!
+Nicole Bade, Mar 25 at 11:17am
+Logsrv didn't come up with the right configuration but I don't think it did for anyone in the class, so I'm taking that off the final.
+Nicole Bade, Mar 25 at 11:18am
+So all in all, good work.  Please make those changes I mentioned to your code as this code will be part of your final for next quarter. Congratulations and good work!
+Nicole Bade, Mar 25 at 11:19am
+I wasn't able to tell what was wrong with your nfs server (your code looked fine) so I'm going to give you plus 5 for that.
+Nicole Bade, Mar 25 at 11:21am
+We'll need to troubleshoot it next quarter.
+Nicole Bade, Mar 25 at 11:21am
+Thanks Nicole! I corrected the LDAP client to point to the server. I am looking at the other stuff now...not for you to change anything but to communicate I understand and am fixing it now...
+JAMIE K BEACH, Mar 25 at 5:40pm
+Of course...I am not happy to hear about the logserver bc I totally thought mine was good and I was super happy about it...but that's the nature of this. :P Will work on that too.
+JAMIE K BEACH, Mar 25 at 5:42pm
+Thank you for being so on top of everything!  Give yourself a break too, you've earned it.  Grading out your other submissions now!
