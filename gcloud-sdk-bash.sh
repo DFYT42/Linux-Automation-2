@@ -125,7 +125,7 @@ sleep 30s
 #    echo $serverip ;
 #    bash /home/g42dfyt/Linux-Automation-3/scp_to_nagios.sh $servername $serverip
 #done
-gcloud compute ssh --zone us-west2-a g42dfyt@nagios-a --command='sudo systemctl restart nagios'
+#gcloud compute ssh --zone us-west2-a g42dfyt@nagios-a --command='sudo systemctl restart nagios'
 
 ##Not sure yet##
 bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
