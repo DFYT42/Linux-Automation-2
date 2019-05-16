@@ -90,6 +90,15 @@ gcloud compute instances create nti320-mt-cacti-server \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/cacti_install.sh
+sleep 30s
+
+##ADD SERVERS TO NAGIOS MONITORING##
+bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
+sleep 30s
+
+##Not sure yet##
+bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
+sleep 30s
 
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
