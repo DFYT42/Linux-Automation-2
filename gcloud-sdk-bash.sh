@@ -79,7 +79,7 @@ gcloud compute instances create nti320-mt-nfs-client \
 --zone us-west2-a \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=nfs_client_automation.sh
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/nfs_client_automation.sh
 sleep 30s
 
 ##CLIENTLDAP##
@@ -90,7 +90,7 @@ gcloud compute instances create nti320-mt-ldap-client \
 --zone us-west2-a \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=ldap-client-automation.sh
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-client-automation.sh
 
 ##NAGIOS##
 echo "NAGIOS"
