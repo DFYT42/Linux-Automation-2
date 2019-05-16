@@ -14,7 +14,7 @@
 gcloud compute instances create nti310-final-logserver \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west1-a \
+--zone us-west2-a \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=ldap-rsyslog.sh
@@ -24,7 +24,7 @@ sleep 30s
 gcloud compute instances create nti310-final-postgres \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west1-a \
+--zone us-west2-a \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -35,7 +35,7 @@ sleep 30s
 gcloud compute instances create nti310-final-ldapserver \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west1-a \
+--zone us-west2-a \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -46,7 +46,7 @@ sleep 30s
 gcloud compute instances create nti310-final-nfsserver \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west1-a \
+--zone us-west2-a \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -57,7 +57,7 @@ sleep 30s
 gcloud compute instances create nti310-final-django-the-j-is-silent-server \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west1-a \
+--zone us-west2-a \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -69,7 +69,7 @@ sleep 30s
 gcloud compute instances create nti310-final-nfs-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
---zone us-west1-a \
+--zone us-west2-a \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=nfs_client_automation.sh
@@ -80,7 +80,7 @@ sleep 30s
 gcloud compute instances create nti310-final-ldap-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
---zone us-west1-a \
+--zone us-west2-a \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=ldap-client-automation.sh
