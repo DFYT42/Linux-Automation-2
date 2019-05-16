@@ -9,64 +9,83 @@ sleep 30s
 
 #Create nine instances
 ##LOGSERVER##
-gcloud compute instances create nti310-final-logserver \
+gcloud compute instances create nti320-mt-logserver \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=ldap-rsyslog.sh
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-rsyslog.sh
 sleep 30s
 
 ##POSTGRES##
-gcloud compute instances create nti310-final-postgres \
+gcloud compute instances create nti320-mt-postgres \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=postgres.sh
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/postgres.sh
 sleep 30s
 
 ##LDAPSERVER##
-gcloud compute instances create nti310-final-ldapserver \
+gcloud compute instances create nti320-mt-ldapserver \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=ldap-server.sh
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-server.sh
 sleep 30s
 
 ##NFSSERVER##
-gcloud compute instances create nti310-final-nfsserver \
+gcloud compute instances create nti320-mt-nfsserver \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=nfs_server_automation.sh
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/nfs_server_automation.sh
 sleep 30s
 
 ##DJANGOSERVER##
-gcloud compute instances create nti310-final-django-the-j-is-silent-server \
+gcloud compute instances create nti320-mt-django-the-j-is-silent-server \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=ldap-django-postgres-migration.sh
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-django-postgres-migration.sh
 sleep 30s
 
 ##NAGIOS##
+gcloud compute instances create nti320-mt-nagios-server \
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-west2-a \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/nagios_install.sh
+sleep 30s
+
+##CACTI##
+gcloud compute instances create nti320-mt-cacti-server \
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-west2-a \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/cacti_install.sh
 
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
-gcloud compute instances create nti310-final-nfs-client \
+gcloud compute instances create nti320-mt-nfs-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
 --zone us-west2-a \
@@ -77,7 +96,7 @@ sleep 30s
 
 ##CLIENTLDAP##
 #Ubuntu 1804 LTS#
-gcloud compute instances create nti310-final-ldap-client \
+gcloud compute instances create nti320-mt-ldap-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
 --zone us-west2-a \
