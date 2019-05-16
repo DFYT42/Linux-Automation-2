@@ -2,9 +2,6 @@
 
 #already has git installed
 #Setup for final
-##UPDATE REPO##
-echo "UPDATING REPO"
-cd Linux-Automation-2/ && git pull && cd ..
 
 ##CLONE NEW REPO##
 echo "CLONE NEW REPO"
@@ -75,27 +72,6 @@ gcloud compute instances create nti320-mt-django-the-j-is-silent-server \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-django-postgres-migration.sh
 sleep 30s
 
-##CLIENTNFS##
-#Ubuntu 1804 LTS#
-gcloud compute instances create nti320-mt-nfs-client \
---image-family ubuntu-1804-lts \
---image-project ubuntu-os-cloud \
---zone us-west2-a \
---machine-type f1-micro \
---scopes cloud-platform \
---metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/nfs_client_automation.sh
-sleep 30s
-
-##CLIENTLDAP##
-#Ubuntu 1804 LTS#
-gcloud compute instances create nti320-mt-ldap-client \
---image-family ubuntu-1804-lts \
---image-project ubuntu-os-cloud \
---zone us-west2-a \
---machine-type f1-micro \
---scopes cloud-platform \
---metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-client-automation.sh
-
 ##NAGIOS##
 echo "NAGIOS"
 gcloud compute instances create nagios-a \
@@ -119,6 +95,27 @@ gcloud compute instances create nti320-mt-cacti-server \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/cacti_install.sh
 sleep 30s
+
+##CLIENTNFS##
+#Ubuntu 1804 LTS#
+gcloud compute instances create nti320-mt-nfs-client \
+--image-family ubuntu-1804-lts \
+--image-project ubuntu-os-cloud \
+--zone us-west2-a \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/nfs_client_automation.sh
+sleep 30s
+
+##CLIENTLDAP##
+#Ubuntu 1804 LTS#
+gcloud compute instances create nti320-mt-ldap-client \
+--image-family ubuntu-1804-lts \
+--image-project ubuntu-os-cloud \
+--zone us-west2-a \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-client-automation.sh
 
 ##ADD SERVERS TO NAGIOS MONITORING##
 bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
