@@ -3,8 +3,8 @@
 #already has git installed
 #Setup for final
 echo "clone repos"
-git clone https://github.com/DFYT42/Linux-Automation-2/
-sleep 30s
+#git clone https://github.com/DFYT42/Linux-Automation-2/
+#sleep 30s
 git clone https://github.com/DFYT42/Linux-Automation-3/
 sleep 30s
 ##SETTING PROJECT##
