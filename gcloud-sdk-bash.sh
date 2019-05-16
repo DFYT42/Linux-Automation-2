@@ -70,7 +70,7 @@ sleep 30s
 
 ##NAGIOS##
 echo "NAGIOS"
-gcloud compute instances create nti320-mt-nagios-server \
+gcloud compute instances create nagios-a \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
