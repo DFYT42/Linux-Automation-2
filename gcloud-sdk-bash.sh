@@ -1,16 +1,13 @@
 #!/bin/bash
-##https://github.com/nic-instruction/hello-nti-310/blob/master/automate.md
-#GCloud
-##TEST
-##sudo su
-#tail -f /var/messages
 
 #already has git installed
 #Setup for final
 git clone https://github.com/DFYT42/Linux-Automation-2/
+sleep 30s
 git clone https://github.com/DFYT42/Linux-Automation-3/
+sleep 30s
 
-#Create seven instances
+#Create nine instances
 ##LOGSERVER##
 gcloud compute instances create nti310-final-logserver \
 --image-family centos-7 \
@@ -64,6 +61,8 @@ gcloud compute instances create nti310-final-django-the-j-is-silent-server \
 --scopes cloud-platform \
 --metadata-from-file startup-script=ldap-django-postgres-migration.sh
 sleep 30s
+
+##NAGIOS##
 
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
