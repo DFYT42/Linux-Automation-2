@@ -7,7 +7,8 @@
 
 #already has git installed
 #Setup for final
-#git clone https://github.com/DFYT42/Linux-Automation-2/
+git clone https://github.com/DFYT42/Linux-Automation-2/
+git clone https://github.com/DFYT42/Linux-Automation-3/
 
 #Create seven instances
 ##LOGSERVER##
