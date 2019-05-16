@@ -2,13 +2,17 @@
 
 #already has git installed
 #Setup for final
-echo "clone repos"
-#git clone https://github.com/DFYT42/Linux-Automation-2/
-#sleep 30s
+##UPDATE REPO##
+echo "UPDATING REPO"
+cd Linux-Automation-2/ && git pull && cd ..
+
+##CLONE NEW REPO##
+echo "CLONE NEW REPO"
 git clone https://github.com/DFYT42/Linux-Automation-3/
 sleep 30s
+
 ##SETTING PROJECT##
-echo "CREATING PROJECT"
+echo "SET PROJECT"
 gcloud config set project nti-320-networkmonitoring
 
 #Create nine instances
