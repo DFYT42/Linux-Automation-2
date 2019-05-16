@@ -7,6 +7,9 @@ git clone https://github.com/DFYT42/Linux-Automation-2/
 sleep 30s
 git clone https://github.com/DFYT42/Linux-Automation-3/
 sleep 30s
+##SETTING PROJECT##
+echo "CREATING PROJECT"
+gcloud config set project ntI_320_midterm
 
 #Create nine instances
 ##LOGSERVER##
