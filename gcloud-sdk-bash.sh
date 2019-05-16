@@ -2,6 +2,7 @@
 
 #already has git installed
 #Setup for final
+echo "clone repos"
 git clone https://github.com/DFYT42/Linux-Automation-2/
 sleep 30s
 git clone https://github.com/DFYT42/Linux-Automation-3/
@@ -9,6 +10,7 @@ sleep 30s
 
 #Create nine instances
 ##LOGSERVER##
+echo "LOGSERVER"
 gcloud compute instances create nti320-mt-logserver \
 --image-family centos-7 \
 --image-project centos-cloud \
@@ -19,6 +21,7 @@ gcloud compute instances create nti320-mt-logserver \
 sleep 30s
 
 ##POSTGRES##
+echo "POSTGRES"
 gcloud compute instances create nti320-mt-postgres \
 --image-family centos-7 \
 --image-project centos-cloud \
@@ -30,6 +33,7 @@ gcloud compute instances create nti320-mt-postgres \
 sleep 30s
 
 ##LDAPSERVER##
+echo "LDAPSERVER"
 gcloud compute instances create nti320-mt-ldapserver \
 --image-family centos-7 \
 --image-project centos-cloud \
@@ -41,6 +45,7 @@ gcloud compute instances create nti320-mt-ldapserver \
 sleep 30s
 
 ##NFSSERVER##
+echo "NFSSERVER"
 gcloud compute instances create nti320-mt-nfsserver \
 --image-family centos-7 \
 --image-project centos-cloud \
@@ -52,6 +57,7 @@ gcloud compute instances create nti320-mt-nfsserver \
 sleep 30s
 
 ##DJANGOSERVER##
+echo "DJANGOSERVER"
 gcloud compute instances create nti320-mt-django-the-j-is-silent-server \
 --image-family centos-7 \
 --image-project centos-cloud \
@@ -63,6 +69,7 @@ gcloud compute instances create nti320-mt-django-the-j-is-silent-server \
 sleep 30s
 
 ##NAGIOS##
+echo "NAGIOS"
 gcloud compute instances create nti320-mt-nagios-server \
 --image-family centos-7 \
 --image-project centos-cloud \
@@ -74,6 +81,7 @@ gcloud compute instances create nti320-mt-nagios-server \
 sleep 30s
 
 ##CACTI##
+echo "CACTI"
 gcloud compute instances create nti320-mt-cacti-server \
 --image-family centos-7 \
 --image-project centos-cloud \
