@@ -9,7 +9,7 @@ git clone https://github.com/DFYT42/Linux-Automation-3/
 sleep 30s
 ##SETTING PROJECT##
 echo "CREATING PROJECT"
-gcloud config set project nti320mt
+gcloud config set project nti-320-networkmonitoring
 
 #Create nine instances
 ##LOGSERVER##
