@@ -118,19 +118,19 @@ gcloud compute instances create nti320-mt-ldap-client \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-client-automation.sh
 
 ##ADD SERVERS TO NAGIOS MONITORING##
-bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
-sleep 30s
-#for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nagios-a );  do 
-#    echo $servername;
-#    serverip=$( gcloud compute instances list | grep $servername | awk '{print $4}');
-#    echo $serverip ;
-#    bash /home/g42dfyt/Linux-Automation-3/scp_to_nagios.sh $servername $serverip
-#done
-#gcloud compute ssh --zone us-west2-a g42dfyt@nagios-a --command='sudo systemctl restart nagios'
+#bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
+#sleep 30s
+for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nagios-a );  do 
+    echo $servername;
+    serverip=$( gcloud compute instances list | grep $servername | awk '{print $4}');
+    echo $serverip ;
+    bash /home/g42dfyt/Linux-Automation-3/scp_to_nagios.sh $servername $serverip
+done
+gcloud compute ssh --zone us-west2-a g42dfyt@nagios-a --command='sudo systemctl restart nagios'
 
 ##Not sure yet##
-bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
-sleep 30s
-#for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nagios-a );  do 
-#    gcloud compute ssh --zone us-west2-a g42dfyt@$servername --command='sudo yum -y install wget && sudo wget https://raw.githubusercontent.com/DFYT42/Linux-Automation-3/master/nagios-client-configuration.sh && sudo bash nagios-client-configuration.sh'
-#done
+#bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
+#sleep 30s
+for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nagios-a );  do 
+    gcloud compute ssh --zone us-west2-a g42dfyt@$servername --command='sudo yum -y install wget && sudo wget https://raw.githubusercontent.com/DFYT42/Linux-Automation-3/master/nagios-client-configuration.sh && sudo bash nagios-client-configuration.sh'
+done
