@@ -131,6 +131,9 @@ gcloud compute ssh --zone us-west2-a g42dfyt@nagios-a --command='sudo systemctl 
 ##Not sure yet##
 #bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
 #sleep 30s
-for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nagios-a );  do 
-    gcloud compute ssh --zone us-west2-a g42dfyt@$servername --command='sudo yum -y install wget && sudo wget https://raw.githubusercontent.com/DFYT42/Linux-Automation-3/master/nagios-client-configuration.sh && sudo bash nagios-client-configuration.sh'
+nagios=( gcloud compute instances list | grep nagios-a | awk '{print $4}')
+sed -i "s/allowed_hosts=127.0.0.1, 10.168.15.196/allowed_hosts=127.0.0.1, $nagios/g" /home/g42dfyt/Linux-Automation-3/nagios-client-configuration.sh
+for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nagios-a );  do
+    gcloud compute scp --zone us-west2-a nagios-client-configuration.sh g42dfyt@$servername:/tmp
+    gcloud compute ssh --zone us-west2-a g42dfyt@$servername --command='sudo bash /tmp/nagios-client-configuration.sh'
 done
