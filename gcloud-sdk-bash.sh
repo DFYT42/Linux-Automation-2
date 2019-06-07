@@ -13,12 +13,65 @@ echo "SET PROJECT"
 gcloud config set project nti-320-networkmonitoring
 
 #Create nine instances
-##LOGSERVER##
-echo "LOGSERVER"
-gcloud compute instances create nti320-mt-logserver \
+##REPO##
+echo "REPO"
+gcloud compute instances create nti320-final-repo-server \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
+--private-network-ip=10.138.0.200
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/create_repo.sh
+sleep 30s
+
+##BUILD##
+echo "BUILD"
+gcloud compute instances create nti320-final-build-server \
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-west2-a \
+--private-network-ip=10.138.0.201
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/rpm_build.sh
+sleep 30s
+
+##NAGIOS##
+echo "NAGIOS"
+gcloud compute instances create nti320-final-nagios-server \
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-west2-a \
+--private-network-ip=10.138.0.202
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/nagios_install.sh
+sleep 30s
+
+##CACTI##
+echo "CACTI"
+gcloud compute instances create nti320-final-cacti-server \
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-west2-a \
+--private-network-ip=10.138.0.203
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/cacti_install.sh
+sleep 30s
+
+##LOGSERVER##
+echo "LOGSERVER"
+gcloud compute instances create nti320-final-logserver \
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-west2-a \
+--private-network-ip=10.138.0.204
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-rsyslog.sh
@@ -26,7 +79,7 @@ sleep 30s
 
 ##POSTGRES##
 echo "POSTGRES"
-gcloud compute instances create nti320-mt-postgres \
+gcloud compute instances create nti320-final-postgres \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
@@ -38,7 +91,7 @@ sleep 30s
 
 ##LDAPSERVER##
 echo "LDAPSERVER"
-gcloud compute instances create nti320-mt-ldapserver \
+gcloud compute instances create nti320-final-ldapserver \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
@@ -50,7 +103,7 @@ sleep 30s
 
 ##NFSSERVER##
 echo "NFSSERVER"
-gcloud compute instances create nti320-mt-nfsserver \
+gcloud compute instances create nti320-final-nfsserver \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
@@ -62,7 +115,7 @@ sleep 30s
 
 ##DJANGOSERVER##
 echo "DJANGOSERVER"
-gcloud compute instances create nti320-mt-django-the-j-is-silent-server \
+gcloud compute instances create nti320-final-django-the-j-is-silent-server \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west2-a \
@@ -70,30 +123,6 @@ gcloud compute instances create nti320-mt-django-the-j-is-silent-server \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-django-postgres-migration.sh
-sleep 30s
-
-##NAGIOS##
-echo "NAGIOS"
-gcloud compute instances create nagios-a \
---image-family centos-7 \
---image-project centos-cloud \
---zone us-west2-a \
---tags "http-server","https-server" \
---machine-type f1-micro \
---scopes cloud-platform \
---metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/nagios_install.sh
-sleep 30s
-
-##CACTI##
-echo "CACTI"
-gcloud compute instances create nti320-mt-cacti-server \
---image-family centos-7 \
---image-project centos-cloud \
---zone us-west2-a \
---tags "http-server","https-server" \
---machine-type f1-micro \
---scopes cloud-platform \
---metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/cacti_install.sh
 sleep 30s
 
 ##CLIENTNFS##
