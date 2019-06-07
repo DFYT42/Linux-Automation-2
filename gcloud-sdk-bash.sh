@@ -18,7 +18,7 @@ echo "REPO"
 gcloud compute instances create nti320-final-repo-server \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --private-network-ip=10.138.0.200
 --tags "http-server","https-server" \
 --machine-type f1-micro \
@@ -32,7 +32,7 @@ gcloud compute instances create nti320-final-build-server \
 --image-family centos-7 \
 --image-project centos-cloud \
 --boot-disk-size=50
---zone us-west2-a \
+--zone us-west1-b \
 --private-network-ip=10.138.0.201
 --tags "http-server","https-server" \
 --machine-type f1-micro \
@@ -45,7 +45,7 @@ echo "NAGIOS"
 gcloud compute instances create nti320-final-nagios-server \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --private-network-ip=10.138.0.202
 --tags "http-server","https-server" \
 --machine-type f1-micro \
@@ -58,7 +58,7 @@ echo "CACTI"
 gcloud compute instances create nti320-final-cacti-server \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --private-network-ip=10.138.0.203
 --tags "http-server","https-server" \
 --machine-type f1-micro \
@@ -71,7 +71,7 @@ echo "LOGSERVER"
 gcloud compute instances create nti320-final-logserver \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --private-network-ip=10.138.0.204
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -83,7 +83,7 @@ echo "POSTGRES"
 gcloud compute instances create nti320-final-postgres \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -95,7 +95,7 @@ echo "LDAPSERVER"
 gcloud compute instances create nti320-final-ldapserver \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -107,7 +107,7 @@ echo "NFSSERVER"
 gcloud compute instances create nti320-final-nfsserver \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -119,7 +119,7 @@ echo "DJANGOSERVER"
 gcloud compute instances create nti320-final-django-the-j-is-silent-server \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -131,7 +131,7 @@ sleep 30s
 gcloud compute instances create nti320-mt-nfs-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/nfs_client_automation.sh
@@ -142,7 +142,7 @@ sleep 30s
 gcloud compute instances create nti320-mt-ldap-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
---zone us-west2-a \
+--zone us-west1-b \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-client-automation.sh
@@ -150,20 +150,20 @@ gcloud compute instances create nti320-mt-ldap-client \
 ##ADD SERVERS TO NAGIOS MONITORING##
 #bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
 #sleep 30s
-for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nagios-a );  do 
+for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nti320-final-nagios-server );  do 
     echo $servername;
     serverip=$( gcloud compute instances list | grep $servername | awk '{print $4}');
     echo $serverip ;
     bash /home/g42dfyt/Linux-Automation-3/scp_to_nagios.sh $servername $serverip
 done
-gcloud compute ssh --zone us-west2-a g42dfyt@nagios-a --command='sudo systemctl restart nagios'
+gcloud compute ssh --zone us-west1-b g42dfyt@nti320-final-nagios-server --command='sudo systemctl restart nagios'
 
 ##Not sure yet##
 #bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
 #sleep 30s
-#nagios=( gcloud compute instances list | grep nagios-a | awk '{print $4}')
+#nagios=( gcloud compute instances list | grep nti320-final-nagios-server | awk '{print $4}')
 #sed -i "s/allowed_hosts=127.0.0.1, 10.168.15.196/allowed_hosts=127.0.0.1, $nagios/g" /home/g42dfyt/Linux-Automation-3/nagios-client-configuration.sh
-#for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nagios-a );  do
-#    gcloud compute scp --zone us-west2-a /home/g42dfyt/Linux-Automation-3/nagios-client-configuration.sh g42dfyt@$servername:/tmp/nagios-client-configuration.sh
-#    gcloud compute ssh --zone us-west2-a g42dfyt@$servername --command='sudo bash /tmp/nagios-client-configuration.sh'
+#for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nti320-final-nagios-server );  do
+#    gcloud compute scp --zone us-west1-b /home/g42dfyt/Linux-Automation-3/nagios-client-configuration.sh g42dfyt@$servername:/tmp/nagios-client-configuration.sh
+#    gcloud compute ssh --zone us-west1-b g42dfyt@$servername --command='sudo bash /tmp/nagios-client-configuration.sh'
 #done
