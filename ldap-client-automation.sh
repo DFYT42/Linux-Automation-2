@@ -33,7 +33,7 @@ nslcd nslcd/ldap-starttls boolean false
 libpam-runtime libpam-runtime/profiles multiselect unix, ldap, systemd, capability
 nslcd nslcd/ldap-sasl-authzid string
 ldap-auth-config ldap-auth-config/rootbinddn string cn=ldapadm,dc=nti310,dc=local
-nslcd nslcd/ldap-uris string ldap://nti310-final-ldapserver
+nslcd nslcd/ldap-uris string ldap://nti320-final-ldapserver
 nslcd nslcd/ldap-reqcert select
 nslcd nslcd/ldap-sasl-secprops string
 ldap-auth-config ldap-auth-config/ldapns/ldap_version select 3
@@ -48,7 +48,7 @@ ldap-auth-config ldap-auth-config/pam_password select md5
 nslcd nslcd/ldap-sasl-mech select
 nslcd nslcd/ldap-sasl-authcid string
 ldap-auth-config ldap-auth-config/ldapns/base-dn string dc=nti310,dc=local
-ldap-auth-config ldap-auth-config/ldapns/ldap-server string ldap://nti310-final-ldapserver
+ldap-auth-config ldap-auth-config/ldapns/ldap-server string ldap://nti320-final-ldapserver
 nslcd nslcd/ldap-binddn string
 ldap-auth-config ldap-auth-config/dblogin boolean false" >> tempfile
 
@@ -67,7 +67,7 @@ echo "account sufficient pam_succeed_if.so uid = 0 use_uid quiet" >> /etc/pam.d/
 
 #need to modify /etc/ldap.conf file with base, ldap, and rootbind info
 sed -i 's/base dc=example,dc=net/base dc=nti310,dc=local/g' /etc/ldap.conf
-sed -i 's,uri ldapi:///,uri ldap://nti310-final-ldapserver,g' /etc/ldap.conf
+sed -i 's,uri ldapi:///,uri ldap://nti320-final-ldapserver,g' /etc/ldap.conf
 sed -i 's/rootbinddn cn=manager,dc=example,dc=net/rootbinddn cn=ldapadm,dc=nti310,dc=local/g' /etc/ldap.conf
 
 #need to restart and enable changes to system
