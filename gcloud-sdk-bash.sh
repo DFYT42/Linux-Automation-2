@@ -148,15 +148,8 @@ gcloud compute instances create nti320-mt-ldap-client \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-client-automation.sh
 
 ##ADD SERVERS TO NAGIOS MONITORING##
-#bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
-#sleep 30s
-for servername in $( gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nti320-final-nagios-server );  do 
-    echo $servername;
-    serverip=$( gcloud compute instances list | grep $servername | awk '{print $4}');
-    echo $serverip ;
-    bash /home/g42dfyt/Linux-Automation-3/scp_to_nagios.sh $servername $serverip
-done
-gcloud compute ssh --zone us-west1-b g42dfyt@nti320-final-nagios-server --command='sudo systemctl restart nagios'
+bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
+sleep 30s
 
 ##Not sure yet##
 #bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
