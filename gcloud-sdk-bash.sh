@@ -151,6 +151,9 @@ gcloud compute instances create nti320-mt-ldap-client \
 bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
 sleep 30s
 
+bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
+sleep 30s
+
 ##Not sure yet##
 #bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
 #sleep 30s
