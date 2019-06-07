@@ -31,6 +31,7 @@ echo "BUILD"
 gcloud compute instances create nti320-final-build-server \
 --image-family centos-7 \
 --image-project centos-cloud \
+--boot-disk-size=50
 --zone us-west2-a \
 --private-network-ip=10.138.0.201
 --tags "http-server","https-server" \
