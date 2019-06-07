@@ -19,7 +19,7 @@ gcloud compute instances create nti320-final-repo-server \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west1-b \
---private-network-ip=10.138.0.200
+--private-network-ip=10.138.0.200 \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -31,9 +31,9 @@ echo "BUILD"
 gcloud compute instances create nti320-final-build-server \
 --image-family centos-7 \
 --image-project centos-cloud \
---boot-disk-size=50
+--boot-disk-size=50 \
 --zone us-west1-b \
---private-network-ip=10.138.0.201
+--private-network-ip=10.138.0.201 \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -46,7 +46,7 @@ gcloud compute instances create nti320-final-nagios-server \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west1-b \
---private-network-ip=10.138.0.202
+--private-network-ip=10.138.0.202 \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -59,7 +59,7 @@ gcloud compute instances create nti320-final-cacti-server \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west1-b \
---private-network-ip=10.138.0.203
+--private-network-ip=10.138.0.203 \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -72,7 +72,7 @@ gcloud compute instances create nti320-final-logserver \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-west1-b \
---private-network-ip=10.138.0.204
+--private-network-ip=10.138.0.204 \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-rsyslog.sh
