@@ -23,7 +23,7 @@ gcloud compute instances create nti320-final-repo-server \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/create_repo.sh
+--metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/create_repos.sh
 sleep 30s
 
 ##BUILD##
