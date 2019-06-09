@@ -128,6 +128,7 @@ sleep 30s
 
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
+echo "NFS CLIENT"
 gcloud compute instances create nti320-final-nfs-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
@@ -139,6 +140,7 @@ sleep 30s
 
 ##CLIENTLDAP##
 #Ubuntu 1804 LTS#
+ECHO "LDAP CLIENT"
 gcloud compute instances create nti320-final-ldap-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
@@ -148,9 +150,11 @@ gcloud compute instances create nti320-final-ldap-client \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-client-automation.sh
 
 ##ADD SERVERS TO NAGIOS MONITORING##
+echo "INSTALLING NAGIOS FOR LOOP"
 bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
 sleep 30s
 
+echo "INSTALLING NRPE FOR LOOP"
 bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
 sleep 30s
 
