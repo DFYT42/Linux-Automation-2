@@ -128,7 +128,7 @@ sleep 30s
 
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
-gcloud compute instances create nti320-mt-nfs-client \
+gcloud compute instances create nti320-final-nfs-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
 --zone us-west1-b \
@@ -139,7 +139,7 @@ sleep 30s
 
 ##CLIENTLDAP##
 #Ubuntu 1804 LTS#
-gcloud compute instances create nti320-mt-ldap-client \
+gcloud compute instances create nti320-final-ldap-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
 --zone us-west1-b \
