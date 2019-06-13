@@ -6,12 +6,12 @@
 
 #purpose: central location for server information/logs
 
-sudo yum update -y && yum install -y rsyslog
+yum update -y
+yum install -y rsyslog
+yum install -y net-tools
 #start the service for now, enable it to auto-start at boot and check it’s status
 sudo systemctl start rsyslog
 sudo systemctl enable rsyslog
-#below not needed in automation
-sudo systemctl status rsyslog
 
 #make backup
 cp /etc/rsyslog.conf /etc/rsyslog.conf.back
@@ -23,7 +23,7 @@ cp /etc/rsyslog.conf /etc/rsyslog.conf.back
 sed -i 's/#$ModLoad imudp/$ModLoad imudp/g' /etc/rsyslog.conf
 sed -i 's/#$UDPServerRun 514/$UDPServerRun 514/g' /etc/rsyslog.conf
 sed -i 's/#$ModLoad imtcp/$ModLoad imtcp/g' /etc/rsyslog.conf
-sed -i 's/#$Input/TCPServerRun 514/$Input/TCPServerRun 514/g' /etc/rsyslog.conf
+sed -i 's/#$InputTCPServerRun 514/$InputTCPServerRun 514/g' /etc/rsyslog.conf
 #define the ruleset for processing remote logs in the following format
 #need line number
 #did not work, so do not add
@@ -53,4 +53,5 @@ sudo semanage -a -t syslogd_port_t -p tcp 514
 
 
 #sudo systemctl status rsyslog
+#To test:
 #tail -f /var/log/messages
