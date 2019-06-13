@@ -4,11 +4,15 @@
 ###based on tutorial: https://github.com/nic-instruction/hello-nti-310/blob/master/postgres.md
 ###https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-centos-7
 #sudo su
+yum install -y epel-release
 yum install -y python-pip
 pip install virtualenv
 pip install --upgrade pip
+yum install -y telnet
+
 mkdir ~/myproject
 cd ~/myproject
+
 ##install virtual python envitroinment to safely upgrade system python whenever we need to 
 #creates that environment for us and change into environment
 virtualenv myprojectenv
@@ -23,12 +27,14 @@ django-admin.py startproject myproject .
 #install this on a server
 #rsyslog should be first server run up
 #rsyslog client automation
-sudo yum update -y && yum install -y rsyslog 	#CentOS 7
-sudo systemctl start rsyslog
-sudo systemctl enable rsyslog
+yum update -y && yum install -y rsyslog 	#CentOS 7
+
+systemctl enable rsyslog
+systemctl start rsyslog
+
 #on the rsyslog client
 #add to end of file
-echo "*.* @@nti310-final-logserver:514" >> /etc/rsyslog.conf
+echo "*.* @@nti320-final-logserver:514" >> /etc/rsyslog.conf
 
 #subnet
 #10.142.0.0/32
