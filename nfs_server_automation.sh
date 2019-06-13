@@ -51,12 +51,11 @@ ifconfig -a | awk 'NR==2{ sub(/^[^0-9]*/, "", $2); printf "This is your Ip Addre
 #rsyslog should be first server run up
 #rsyslog client automation
 yum update -y && yum install -y rsyslog 	#CentOS 7
-systemctl enable rsyslog
 systemctl start rsyslog
-
+systemctl enable rsyslog
 #on the rsyslog client
 #add to end of file
 echo "*.* @@nti320-final-logserver:514" >> /etc/rsyslog.conf
 
-systemctl restart rsyslog
-systemctl status rsyslog
+#restart rsyslog
+sudo systemctl restart rsyslog
