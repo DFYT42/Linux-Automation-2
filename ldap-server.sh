@@ -316,11 +316,12 @@ systemctl restart httpd
 #install this on a server
 #rsyslog should be first server run up
 #rsyslog client automation
-sudo yum update -y && yum install -y rsyslog 	#CentOS 7
-sudo systemctl start rsyslog
-sudo systemctl enable rsyslog
+yum update -y && yum install -y rsyslog 	#CentOS 7
+systemctl start rsyslog
+systemctl enable rsyslog
 #on the rsyslog client
 #add to end of file
 echo "*.* @@nti320-final-logserver:514" >> /etc/rsyslog.conf
 
-   
+#restart rsyslog
+sudo systemctl restart rsyslog
