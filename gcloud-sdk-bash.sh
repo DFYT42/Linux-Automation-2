@@ -6,7 +6,7 @@
 ##CLONE NEW REPO##
 echo "CLONE NEW REPO"
 git clone https://github.com/DFYT42/Linux-Automation-3/
-sleep 30s
+sleep 15s
 
 ##SETTING PROJECT##
 echo "SET PROJECT"
@@ -24,7 +24,7 @@ gcloud compute instances create nti320-final-repo-server \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/create_repos.sh
-sleep 30s
+sleep 15s
 
 ##BUILD##
 echo "BUILD"
@@ -38,7 +38,7 @@ gcloud compute instances create nti320-final-build-server \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/rpm_build.sh
-sleep 30s
+sleep 15s
 
 ##NAGIOS##
 echo "NAGIOS"
@@ -51,7 +51,7 @@ gcloud compute instances create nti320-final-nagios-server \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/nagios_install.sh
-sleep 30s
+sleep 15s
 
 ##CACTI##
 echo "CACTI"
@@ -64,7 +64,7 @@ gcloud compute instances create nti320-final-cacti-server \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-3/cacti_install.sh
-sleep 30s
+sleep 15s
 
 ##LOGSERVER##
 echo "LOGSERVER"
@@ -76,7 +76,7 @@ gcloud compute instances create nti320-final-logserver \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-rsyslog.sh
-sleep 30s
+sleep 15s
 
 ##POSTGRES##
 echo "POSTGRES"
@@ -88,7 +88,7 @@ gcloud compute instances create nti320-final-postgres \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/postgres.sh
-sleep 30s
+sleep 15s
 
 ##LDAPSERVER##
 echo "LDAPSERVER"
@@ -100,7 +100,7 @@ gcloud compute instances create nti320-final-ldapserver \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-server.sh
-sleep 30s
+sleep 15s
 
 ##NFSSERVER##
 echo "NFSSERVER"
@@ -112,7 +112,7 @@ gcloud compute instances create nti320-final-nfsserver \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/nfs_server_automation.sh
-sleep 30s
+sleep 15s
 
 ##DJANGOSERVER##
 echo "DJANGOSERVER"
@@ -124,7 +124,7 @@ gcloud compute instances create nti320-final-django-the-j-is-silent-server \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-django-postgres-migration.sh
-sleep 30s
+sleep 15s
 
 ##CLIENTNFS##
 #Ubuntu 1804 LTS#
@@ -136,7 +136,7 @@ gcloud compute instances create nti320-final-nfs-client \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/nfs_client_automation.sh
-sleep 30s
+sleep 15s
 
 ##CLIENTLDAP##
 #Ubuntu 1804 LTS#
@@ -148,15 +148,16 @@ gcloud compute instances create nti320-final-ldap-client \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-client-automation.sh
+sleep 15s
 
 ##ADD SERVERS TO NAGIOS MONITORING##
 echo "INSTALLING NAGIOS FOR LOOP"
 bash /home/g42dfyt/Linux-Automation-3/for_loop.sh
-sleep 30s
+sleep 15s
 
 echo "INSTALLING NRPE FOR LOOP"
 bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
-sleep 30s
+sleep 15s
 
 ##Not sure yet##
 #bash /home/g42dfyt/Linux-Automation-3/for_loop_for_nrpe_install.sh
