@@ -28,13 +28,14 @@ django-admin.py startproject myproject .
 #rsyslog should be first server run up
 #rsyslog client automation
 yum update -y && yum install -y rsyslog 	#CentOS 7
-
-systemctl enable rsyslog
 systemctl start rsyslog
-
+systemctl enable rsyslog
 #on the rsyslog client
 #add to end of file
 echo "*.* @@nti320-final-logserver:514" >> /etc/rsyslog.conf
+
+#restart rsyslog
+sudo systemctl restart rsyslog
 
 #subnet
 #10.142.0.0/32
