@@ -76,6 +76,21 @@ gcloud compute instances create nti320-final-logserver \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=/home/g42dfyt/Linux-Automation-2/ldap-rsyslog.sh
+
+rsyslog_ip=$(gcloud compute instances list | grep $nti320-final-logserver | awk '{ print $4 }' | tail -1)
+
+djangoserver=/home/g42dfyt/Linux-Automation-2/ldap-django-postgres-migration.sh
+sed -i "s/\$rsys_ip/$rsyslog_ip/g" $djangoserver
+
+ldapserver=/home/g42dfyt/Linux-Automation-2/ldap-server.sh
+sed -i "s/\$rsys_ip/$rsyslog_ip/g" $ldapserver
+
+postgresserver=/home/g42dfyt/Linux-Automation-2/postgres.sh
+sed -i "s/\$rsys_ip/$rsyslog_ip/g" $postgresserver
+
+nfsserver=/home/g42dfyt/Linux-Automation-2/nfs_server_automation.sh
+sed -i "s/\$rsys_ip/$rsyslog_ip/g" $nfsserver
+
 sleep 15s
 
 ##POSTGRES##
