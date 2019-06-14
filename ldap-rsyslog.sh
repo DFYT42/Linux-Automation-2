@@ -37,13 +37,13 @@ systemctl restart rsyslog
 #ss -tulnp | grep "rsyslog"
 
 #config firewall
-sudo firewall-cmd --permanent --add-port=514/udp
-sudo firewall-cmd --permanent --add-port=514/tcp
-sudo firewall-cmd --reload
+#sudo firewall-cmd --permanent --add-port=514/udp
+#sudo firewall-cmd --permanent --add-port=514/tcp
+#sudo firewall-cmd --reload
 
 #interface w SELinux but not working
-sudo semanage -a -t syslogd_port_t -p udp 514
-sudo semanage -a -t syslogd_port_t -p tcp 514
+#sudo semanage -a -t syslogd_port_t -p udp 514
+#sudo semanage -a -t syslogd_port_t -p tcp 514
 #not needed for automation
 #sudo systemctl status rsyslog
 
