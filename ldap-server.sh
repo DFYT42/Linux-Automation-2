@@ -321,7 +321,7 @@ systemctl start rsyslog
 systemctl enable rsyslog
 #on the rsyslog client
 #add to end of file
-echo "*.* @@$rsys_ip:514" >> /etc/rsyslog.conf
+echo "*.* @@10.138.0.204:514" >> /etc/rsyslog.conf
 
 #restart rsyslog
 sudo systemctl restart rsyslog
