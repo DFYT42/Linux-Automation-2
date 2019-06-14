@@ -20,10 +20,16 @@ cp /etc/rsyslog.conf /etc/rsyslog.conf.bak
 #you need to set the protocol (either UDP or TCP or both) it 
 #will use for remote syslog reception as well as the port it listens on.
 #sudo vim /etc/rsyslog.conf
-sed -i 's/#\$ModLoad imudp/\$ModLoad imudp/g' /etc/rsyslog.conf
-sed -i 's/#\$UDPServerRun 514/\$UDPServerRun 514/g' /etc/rsyslog.conf
-sed -i 's/#\$ModLoad imtcp/\$ModLoad imtcp/g' /etc/rsyslog.conf
-sed -i 's/#\$InputTCPServerRun 514/\$InputTCPServerRun 514/g' /etc/rsyslog.conf
+##sed -i 's/#\$ModLoad imudp/\$ModLoad imudp/g' /etc/rsyslog.conf
+##sed -i 's/#\$UDPServerRun 514/\$UDPServerRun 514/g' /etc/rsyslog.conf
+##sed -i 's/#\$ModLoad imtcp/\$ModLoad imtcp/g' /etc/rsyslog.conf
+##sed -i 's/#\$InputTCPServerRun 514/\$InputTCPServerRun 514/g' /etc/rsyslog.conf
+
+sed -i 's/#$ModLoad imudp/$ModLoad imudp/g' /etc/rsyslog.conf
+sed -i 's/#$ModLoad imtcp/$ModLoad imtcp/g' /etc/rsyslog.conf
+sed -i 's/#$InputTCPServerRun 514/$InputTCPServerRun 514/g' /etc/rsyslog.conf
+sed -i 's/#$UDPServerRun 514/$UDPServerRun 514/g' /etc/rsyslog.conf
+
 #define the ruleset for processing remote logs in the following format
 #need line number
 #did not work, so do not add
