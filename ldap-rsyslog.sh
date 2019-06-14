@@ -27,12 +27,19 @@ sed -i 's/#$InputTCPServerRun 514/$InputTCPServerRun 514/g' /etc/rsyslog.conf
 #define the ruleset for processing remote logs in the following format
 #need line number
 #did not work, so do not add
-#*.* ?RemoteLogs 
-#& ~
+echo '$template RemoteLogs,"/var/log/%HOSTNAME%/%PROGRAMNAME%.log"
+*.* ?RemoteLogs 
+& ~' >> /etc/rsyslog.conf
 
 systemctl restart rsyslog
+
 #see tcp, udp, listening, number, port and look for rsyslog
-ss -tulnp | grep "rsyslog"
+#ss -tulnp | grep "rsyslog"
+
+#config firewall
+sudo firewall-cmd --permanent --add-port=514/udp
+sudo firewall-cmd --permanent --add-port=514/tcp
+sudo firewall-cmd --reload
 
 #interface w SELinux but not working
 sudo semanage -a -t syslogd_port_t -p udp 514
