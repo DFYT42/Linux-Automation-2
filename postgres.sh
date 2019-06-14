@@ -99,7 +99,7 @@ systemctl start rsyslog
 systemctl enable rsyslog
 #on the rsyslog client
 #add to end of file
-echo "*.* @@nti320-final-logserver:514" >> /etc/rsyslog.conf
+echo "*.* @@$rsys_ip:514" >> /etc/rsyslog.conf
 
 #restart rsyslog
 sudo systemctl restart rsyslog
