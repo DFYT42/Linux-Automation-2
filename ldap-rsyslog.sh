@@ -14,7 +14,7 @@ sudo systemctl start rsyslog
 sudo systemctl enable rsyslog
 
 #make backup
-cp /etc/rsyslog.conf /etc/rsyslog.conf.back
+cp /etc/rsyslog.conf /etc/rsyslog.conf.bak
 #edit
 #To configure rsyslog as a network/central logging server, 
 #you need to set the protocol (either UDP or TCP or both) it 
