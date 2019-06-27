@@ -141,7 +141,7 @@ sleep 15s
 
 ##CLIENTLDAP##
 #Ubuntu 1804 LTS#
-ECHO "LDAP CLIENT"
+echo "LDAP CLIENT"
 gcloud compute instances create nti320-final-ldap-client \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
