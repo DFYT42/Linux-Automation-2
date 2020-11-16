@@ -4,7 +4,7 @@
 <li>Mid-Level Linux automation scripts for spinning up network devices.</li>
 </ul>
 <b>LDAP Servers</b>
-<ul>
+
 What does LDAP stand for?
 <ul>
 <li>Lightweight Diretory Access Protocol</li>
@@ -68,4 +68,3 @@ What do nfsstat and netstat each do?
 What is automounting?  Why is it used?
 <li>Automounting is when file systems are automatically installed based on anither programs activities</li>
 <li>It is used to autoinstall and complete installations, when programs are found missing, to complete the task</li>
-</ul>
