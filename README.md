@@ -9,11 +9,11 @@ NTI 310
 *LDAP Servers*
 
 What does LDAP stand for?
-* Lightweight Diretory Access Protocol
+<li>Lightweight Diretory Access Protocol</li>
 
 Why is it used in large production environments?
-* LDAP is a directory server with user information and properties
-* LDAP allows employees, from multiple departments, to be identidfied and given access to use multiple applications within the orginization, based on their directory properties/group permissions.
+<li>LDAP is a directory server with user information and properties</li>
+<li>LDAP allows employees, from multiple departments, to be identidfied and given access to use multiple applications within the orginization, based on their directory properties/group permissions.</li>
 
 What does it do?
 * Acts as a central directory of user information, that provides fast search results, becuase the LDAP server mainly reads and returns information, with little writing, that can be time consuming, and cut into the return response time.
