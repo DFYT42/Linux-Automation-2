@@ -5,7 +5,8 @@ NTI 310
 <li>Line 1</li>
 <li>Line 2</li>
 </ul>
-*LDAP Servers*
+<b>LDAP Servers</b>
+
 What does LDAP stand for?
 <ul>
 <li>Lightweight Diretory Access Protocol</li>
