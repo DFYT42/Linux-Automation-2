@@ -4,7 +4,7 @@
 <li>Mid-Level Linux automation scripts for spinning up network devices.</li>
 </ul>
 <b>LDAP Servers</b>
-
+<ul></ul>
 What does LDAP stand for?
 <li>Lightweight Diretory Access Protocol</li>
 
