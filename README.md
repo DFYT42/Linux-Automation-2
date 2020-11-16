@@ -2,6 +2,7 @@
 <b>NTI 310</b>
 <ul>
 <li>Mid-Level Linux automation scripts for spinning up network devices.</li>
+<li>The questions below relate to the tools and techniques utilized in this repos scripts.</li>
 </ul>
 <b>LDAP Servers</b>
 <ul></ul>
