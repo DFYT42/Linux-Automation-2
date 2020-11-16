@@ -1,9 +1,8 @@
 # Linux-Automation-2
-NTI 310
-
+<b>NTI 310</b>
 <ul>
-<li>Line 1</li>
-<li>Line 2</li>
+<li>Mid-Level Linux automation scripts for spinning up network devices.</li>
+<li><li>Line 2</li></li>
 </ul>
 <b>LDAP Servers</b>
 
