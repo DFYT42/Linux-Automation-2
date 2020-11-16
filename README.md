@@ -6,9 +6,8 @@
 <b>LDAP Servers</b>
 
 What does LDAP stand for?
-<ul>
 <li>Lightweight Diretory Access Protocol</li>
-</ul>
+
 Why is it used in large production environments?
 <li>LDAP is a directory server with user information and properties</li>
 <li>LDAP allows employees, from multiple departments, to be identidfied and given access to use multiple applications within the orginization, based on their directory properties/group permissions.</li>
